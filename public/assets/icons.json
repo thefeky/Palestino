@@ -1,0 +1,79 @@
+{
+  "subcategories": [
+    {
+      "subName": "Phones",
+      "subIcon": "https://img.icons8.com/?size=100&id=11409&format=png&color=000000"
+    },
+    {
+      "subName": "Laptops",
+      "subIcon": "https://img.icons8.com/?size=100&id=2884&format=png&color=000000"
+    },
+    {
+      "subName": "PC",
+      "subIcon": "https://img.icons8.com/?size=100&id=1345&format=png&color=000000"
+    },
+    {
+      "subName": "Cameras",
+      "subIcon": "https://img.icons8.com/?size=100&id=11741&format=png&color=000000"
+    },
+    {
+      "subName": "Headphones",
+      "subIcon": "https://img.icons8.com/?size=100&id=16E6Q5Vjlb6D&format=png&color=000000"
+    },
+    {
+      "subName": "Speakers",
+      "subIcon": "https://img.icons8.com/?size=100&id=85682&format=png&color=000000"
+    },
+    {
+      "subName": "Monitors",
+      "subIcon": "https://img.icons8.com/?size=100&id=39210&format=png&color=000000"
+    },
+    {
+      "subName": "Printers",
+      "subIcon": "https://img.icons8.com/?size=100&id=6361&format=png&color=000000"
+    },
+    {
+      "subName": "Gaming",
+      "subIcon": "https://img.icons8.com/?size=100&id=Ntb0hjLjjBxW&format=png&color=000000"
+    }
+  ],
+  "stats": [
+    {
+      "subName": "10.5k",
+      "subIcon": "https://img.icons8.com/?size=100&id=cax7M54yRD3l&format=png&color=FFFFFF",
+      "subDescription": "Sallers active our site"
+    },
+    {
+      "subName": "33k",
+      "subIcon": "https://img.icons8.com/?size=100&id=aTrWEDlg4xEW&format=png&color=FFFFFF",
+      "subDescription": "Monthly Product Sale"
+    },
+    {
+      "subName": "45.5k",
+      "subIcon": "https://img.icons8.com/?size=100&id=VksxHreSn4ck&format=png&color=FFFFFF",
+      "subDescription": "Customers active in our site"
+    },
+    {
+      "subName": "25k",
+      "subIcon": "https://img.icons8.com/?size=100&id=22361&format=png&color=FFFFFF",
+      "subDescription": "Anunal gross sale in our site"
+    }
+  ],
+  "perks": [
+    {
+      "subName": "FREE AND FAST DELIVERY",
+      "subIcon": "https://img.icons8.com/?size=100&id=7493&format=png&color=FFFFFF",
+      "subDescription": "Free delivery for all orders over $140"
+    },
+    {
+      "subName": "24/7 CUSTOMER SERVICE",
+      "subIcon": "https://img.icons8.com/?size=100&id=59851&format=png&color=FFFFFF",
+      "subDescription": "Friendly 24/7 customer support"
+    },
+    {
+      "subName": "MONEY BACK GUARANTEE",
+      "subIcon": "https://img.icons8.com/?size=100&id=2606&format=png&color=FFFFFF",
+      "subDescription": "We return money within 30 days"
+    }
+  ]
+}
