@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 function ProductList({
   featured,

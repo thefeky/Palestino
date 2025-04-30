@@ -1,8 +1,8 @@
-import AccordionComp from "@/components/AccordionComp";
+import AccordionComp from "@/components/homepage/AccordionComp";
 import Break from "@/components/shared/Break";
-import CarouselComp from "@/components/CarouselComp";
-import Section from "@/components/Section";
-import IconList from "@/components/IconList";
+import CarouselComp from "@/components/homepage/CarouselComp";
+import Section from "@/components/shared/Section";
+import IconList from "@/components/shared/IconList";
 
 function Homepage() {
   return (
