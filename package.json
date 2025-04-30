@@ -7,9 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "server": "json-server --watch ./public/assets/products.json --port 3001",
-    "server2": "json-server --watch ./public/assets/icons.json --port 3002"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

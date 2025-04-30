@@ -16,12 +16,13 @@ function ProductList({
   useEffect(() => {
     function fetchProducts() {
       axios
-        .get("http://localhost:3001/products", {
+        .get("/assets/products.json", {
           params: {
             featured: featured,
           },
         })
-        .then((res) => setProducts(res.data));
+        .then((res) => setProducts(res.data.products))
+        .catch((err) => console.error(err));
     }
     fetchProducts();
   }, [featured]);

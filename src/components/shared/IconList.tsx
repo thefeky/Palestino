@@ -29,8 +29,9 @@ function IconList({
   useEffect(() => {
     function fetchIcons() {
       axios
-        .get(`http://localhost:3002/${option}`)
-        .then((res) => setIcons(res.data));
+        .get("/assets/icons.json")
+        .then((res) => setIcons(res.data[option]))
+        .catch((err) => console.error("Error fetching icons:", err));
     }
     fetchIcons();
   }, [option]);
