@@ -24,10 +24,10 @@ function Icon({
   classes?: string;
 }) {
   return (
-    <div className={`${classes} flex-center  flex-col gap-6`}>
+    <div className={`${classes} flex-center flex-col gap-6`}>
       <div className={`flex items-center ${border} rounded-${radius}`}>
         <div
-          className={`relative h-${size} w-${size} overflow-hidden rounded-${radius}  flex-center flex-col gap-2 bg-${color}`}
+          className={`mx-auto h-${size} w-${size} flex-center flex-col rounded-${radius} gap-2 bg-${color}`}
         >
           <img
             src={subIcon}

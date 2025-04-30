@@ -7,7 +7,7 @@ import IconList from "@/components/IconList";
 function Homepage() {
   return (
     <>
-      <main className="md:w-[90%] xl:w-[80%] mx-auto my-10 py-20]">
+      <main className="md:w-[90%] xl:w-[80%] mx-auto my-10 py-20">
         <div className="gap-10 xl:gap-20 hidden md:flex md:h-90">
           <AccordionComp />
           <CarouselComp width="w-[80%]" md="" lg="" />
