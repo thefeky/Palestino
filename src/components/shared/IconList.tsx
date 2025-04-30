@@ -11,17 +11,17 @@ function IconList({
   border,
   classes,
   includeNames,
-  gap = 8,
+  gap,
   includeDescription,
 }: {
   option: string;
   color?: string;
-  size?: string;
-  iconSize?: string;
+  size?: number;
+  iconSize?: number;
   radius?: string;
   border?: string;
   includeNames?: boolean;
-  gap?: number;
+  gap?: string;
   includeDescription?: boolean;
   classes?: string;
 }) {
@@ -36,7 +36,7 @@ function IconList({
   }, [option]);
 
   return (
-    <div className={`flex-center flex-wrap gap-6 xl:gap-${gap} mx-auto`}>
+    <div className={`flex-center flex-wrap gap-6 ${gap} mx-auto`}>
       {icons.map(
         (icon: {
           subIcon: string;

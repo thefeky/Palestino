@@ -2,8 +2,8 @@ function Icon({
   subIcon,
   subName,
   color,
-  size = "40",
-  iconSize = "14",
+  size,
+  iconSize,
   radius = "xl",
   border = "border-2 border-black",
   includeNames = true,
@@ -14,8 +14,8 @@ function Icon({
   subIcon: string;
   subName: string;
   color?: string;
-  size?: string;
-  iconSize?: string;
+  size?: number;
+  iconSize?: number;
   radius?: string;
   border?: string;
   includeNames?: boolean;
@@ -27,11 +27,15 @@ function Icon({
     <div className={`${classes} flex-center flex-col gap-6`}>
       <div className={`flex items-center ${border} rounded-${radius}`}>
         <div
-          className={`mx-auto h-${size} w-${size} flex-center flex-col rounded-${radius} gap-2 bg-${color}`}
+          className={`${
+            size ? `w-${size} h-${size}` : "w-40 h-40"
+          } flex-center flex-col rounded-${radius} gap-2 bg-${color}`}
         >
           <img
             src={subIcon}
-            className={`h-${iconSize} w-${iconSize} object-contain" alt="icon`}
+            className={`${
+              iconSize ? `w-${iconSize} h-${iconSize}` : "w-14 h-14"
+            } object-contain" alt="icon`}
           />
           {includeNames ? (
             <span

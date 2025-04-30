@@ -7,7 +7,7 @@ import IconList from "@/components/shared/IconList";
 function Homepage() {
   return (
     <>
-      <main className="md:w-[90%] xl:w-[80%] mx-auto my-10 py-20">
+      <main className="md:w-[90%] xl:w-[80%] mx-auto py-10">
         <div className="gap-10 xl:gap-20 hidden md:flex md:h-90">
           <AccordionComp />
           <CarouselComp width="w-[80%]" md="" lg="" />
@@ -19,7 +19,7 @@ function Homepage() {
           text="Browse By Sub Category"
           productSection={false}
         />
-        <IconList option="subcategories" classes="xl:w-1/11" />
+        <IconList option="subcategories" size={40} />
         <Break />
         <Section
           title="This Month"
@@ -32,12 +32,12 @@ function Homepage() {
         <IconList
           option="perks"
           color="black"
-          size="16"
-          iconSize="10"
+          size={20}
+          iconSize={14}
           radius="full"
-          border="border-gray-300 border-12"
+          border="border-gray-300 border-16"
           includeNames={false}
-          gap={22}
+          gap="xl:gap-30"
           includeDescription={true}
           classes="my-6"
         />
