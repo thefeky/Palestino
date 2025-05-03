@@ -1,15 +1,17 @@
-import { NavLink } from "react-router-dom";
-import logo from "/assets/shared/icon.svg";
-import logo2 from "/assets/shared/logo2.png";
-import triangle from "/assets/shared/Red_Triangle.svg";
+import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
+import logo from "/assets/shared/icon.svg";
+import logo2 from "/assets/shared/logo2.png";
+import triangle from "/assets/shared/Red_Triangle.svg";
+import Banner from "./Banner";
+
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const isMd = useMediaQuery({ query: "(min-width: 768px)" });
   const isXl = useMediaQuery({ query: "(min-width: 1280px)" });
+  const location = useLocation();
 
   useEffect(() => {
     if (isXl && !isMd) {
@@ -17,54 +19,62 @@ function NavBar() {
     }
   }, [isXl, isMd]);
 
+  const toggleMenu = () => {
+    if (isMd) return;
+    setIsMenuOpen((prev) => !prev);
+  };
+
   return (
     <>
-      <p className="hidden md:flex-center bg-red-500 h-8 text-white ">
-        Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
-        <span className="font-semibold underline ml-2">ShopNow</span>
-      </p>
-
+      {location.pathname === "/" && <Banner />}
       <header
-        className={`flex justify-between items-center text-black py-2 px-6 md:px-12 bg-white drop-shadow-md
-      }`}
+        className={`flex items-center justify-between text-black py-2 px-6 md:px-12 bg-white ${
+          isMenuOpen ? "shadow-none" : "shadow-md"
+        } z-50`}
       >
-        <a href="#">
+        <NavLink to="/">
           <img
             src={`${isMd ? logo2 : logo}`}
             alt="logo"
             className="w-14 md:w-50 min-w-10"
           />
-        </a>
+        </NavLink>
         <ul
-          className={` xl:flex xl:flex-row items-center font-semibold xl:text-lg ${
+          className={`xl:flex xl:flex-row items-center justify-center font-semibold xl:text-lg z-50 ${
             isMenuOpen
-              ? "absolute top-24 left-0 w-full bg-white flex flex-col items-center gap-6 text-lg py-6"
+              ? "absolute top-24 left-0 w-full bg-white flex flex-col items-center gap-6 text-lg pb-6 shadow-md"
               : "hidden gap-12"
           }`}
         >
           <li>
-            <NavLink className="nav-link" to="/">
+            <NavLink className="nav-link" to="/" onClick={toggleMenu}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink className="nav-link" to="/contact">
+            <NavLink className="nav-link" to="/contact" onClick={toggleMenu}>
               Contact
             </NavLink>
           </li>
           <li>
-            <NavLink className="nav-link" to="/About">
+            <NavLink className="nav-link" to="/About" onClick={toggleMenu}>
               About
             </NavLink>
           </li>
           <li>
-            <NavLink className="nav-link" to="/login">
-              Sign In
+            <NavLink className="nav-link" to="/login" onClick={toggleMenu}>
+              Login
             </NavLink>
           </li>
         </ul>
-        <div className="relative flex-center gap-3">
-          <i className="bx bx-search absolute right-7 text-2xl text-gray-500 cursor-pointer"></i>
+        <div
+          className={`relative flex-center gap-3 ${
+            location.pathname !== "/" ? "opacity-0" : ""
+          }`}
+        >
+          <NavLink to="/" className="flex-center">
+            <i className="bx bx-search absolute right-7 text-2xl text-gray-500 cursor-pointer"></i>
+          </NavLink>
           <input
             type="text"
             placeholder="What are you looking for?"

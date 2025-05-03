@@ -1,65 +1,79 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useMediaQuery } from "react-responsive";
+
 import Card from "./Card";
 import { Button } from "../ui/button";
 
-function ProductList({
-  featured,
-  num = 4,
-}: {
+interface Product {
+  productName: string;
+  productImage: string;
+  productPrice: number;
+  productDetails: string;
+  category: string;
+  stock: number;
+  rating: number;
+  seller: string;
+  promotion: number;
   featured?: boolean;
+}
+
+interface ProductListProps {
+  onSale?: boolean;
   num?: number;
-}) {
-  const [products, setProducts] = useState([]);
+}
+
+function ProductList({ onSale, num = 4 }: ProductListProps) {
+  const [products, setProducts] = useState<Product[]>([]);
   const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     function fetchProducts() {
       axios
-        .get("/assets/products.json", {
-          params: {
-            featured: featured,
-          },
+        .get("/assets/products.json")
+        .then((res) => {
+          const products = res.data.products;
+          if (onSale !== undefined) {
+            const filteredProducts = products.filter(
+              (product: Product) => product.featured === onSale
+            );
+            setProducts(filteredProducts);
+          } else {
+            setProducts(products);
+          }
         })
-        .then((res) => setProducts(res.data.products))
-        .catch((err) => console.error(err));
+        .catch((err) => console.error("Error fetching products:", err));
     }
     fetchProducts();
-  }, [featured]);
+  }, [onSale]);
 
-  const visibleProducts = showMore ? products : products.slice(0, num);
+  const duoFix = useMediaQuery({
+    minWidth: 1100,
+    maxWidth: 1280,
+  });
+
+  const visibleProducts = showMore
+    ? products
+    : products.slice(0, duoFix ? 3 : num);
 
   return (
     <>
       <div className="flex flex-wrap gap-5">
-        {visibleProducts.map(
-          (product: {
-            productName: string;
-            productImage: string;
-            productPrice: number;
-            productDetails: string;
-            category: string;
-            stock: number;
-            rating: number;
-            seller: string;
-            promotion: number;
-            featured: boolean;
-          }) => (
-            <Card
-              key={product.productName}
-              productImage={product.productImage}
-              productName={product.productName}
-              productPrice={product.productPrice}
-              // productDetails={product.productDetails}
-              // category={product.category}
-              // stock={product.stock}
-              rating={product.rating}
-              // seller={product.seller}
-              promotion={product.promotion}
-              featured={product.featured}
-            />
-          )
-        )}
+        {visibleProducts.map((product) => (
+          <Card
+            key={product.productName}
+            productImage={product.productImage}
+            productName={product.productName}
+            productPrice={product.productPrice}
+            // productDetails={product.productDetails}
+            // category={product.category}
+            // stock={product.stock}
+            rating={product.rating}
+            // seller={product.seller}
+            promotion={product.promotion}
+            featured={product.featured}
+          />
+        ))}
       </div>
       <div className="flex justify-center">
         <Button

@@ -8,23 +8,24 @@ function Homepage() {
   return (
     <>
       <main className="md:w-[90%] xl:w-[80%] mx-auto py-10">
-        <div className="gap-10 xl:gap-20 hidden md:flex md:h-90">
+        <div className="gap-10 xl:gap-10 hidden md:flex md:h-90">
           <AccordionComp />
+          <Break horizontal={false} />
           <CarouselComp width="w-[80%]" md="" lg="" />
         </div>
-        <Section title="Today's" text="Flash Sales" featured />
+        <Section title="Today's" text="Flash Sales" onSale={true} />
         <Break />
         <Section
           title="Sub Categories"
           text="Browse By Sub Category"
           productSection={false}
         />
-        <IconList option="subcategories" size={40} />
+        <IconList option="subcategories" classes="xl:hover:scale-101" />
         <Break />
         <Section
           title="This Month"
           text="Best Selling Products"
-          featured={false}
+          onSale={false}
         />
         <Break />
         <Section title="Our Products" text="Explore Our Products" num={8} />
@@ -32,10 +33,10 @@ function Homepage() {
         <IconList
           option="perks"
           color="black"
-          size={20}
-          iconSize={14}
+          size={58}
+          iconSize={10}
           radius="full"
-          border="border-gray-300 border-16"
+          border="border-gray-300 border-11"
           includeNames={false}
           gap="xl:gap-30"
           includeDescription={true}

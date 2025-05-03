@@ -1,3 +1,14 @@
+import { NavLink } from "react-router";
+
+interface CardProps {
+  productName: string;
+  productImage: string;
+  promotion: number;
+  featured?: boolean;
+  productPrice: number;
+  rating: number;
+}
+
 function Card({
   productName,
   productImage,
@@ -5,43 +16,41 @@ function Card({
   featured,
   productPrice,
   rating,
-}: {
-  productName: string;
-  productImage: string;
-  promotion: number;
-  featured: boolean;
-  productPrice: number;
-  rating: number;
-}) {
-  const priceAfterPromotion = productPrice - (productPrice * promotion) / 100;
+}: CardProps) {
+  const priceAfterPromotion = +(
+    productPrice -
+    (productPrice * promotion) / 100
+  ).toFixed(2);
 
   return (
-    <div className="relative m-auto flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
-      <a
-        className="relative mx-3 mt-3 flex-center h-60 w-auto overflow-hidden rounded-xl"
-        href="#"
+    <div className="relative m-auto flex w-[90%] md:w-full max-w-xs flex-col overflow-hidden rounded-lg border border-red-500 bg-white duration-500 ease-in-out xl:hover:scale-105 hover:shadow-md hover:shadow-gray-500">
+      <NavLink
+        className="relative mx-3 mt-3 flex-center h-50 w-auto overflow-hidden rounded-xl"
+        to="/"
       >
-        <img className="h-60" src={productImage} alt="product image" />
+        <img className="h-40" src={productImage} alt="product image" />
         {featured ? (
           <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
             {promotion}% OFF
           </span>
         ) : null}
-      </a>
+      </NavLink>
       <div className="mt-4 px-5 pb-5">
-        <a href="#">
+        <NavLink to="/">
           <h5 className="text-xl tracking-tight text-slate-900">
             {productName}
           </h5>
-        </a>
+        </NavLink>
         <div className="mt-2 mb-5 flex items-center justify-between">
           <p>
-            <span className="text-3xl font-bold text-slate-900 mr-3">
+            <span className="text-3xl font-bold text-slate-900 mr-1 xl:mr-3">
               ${priceAfterPromotion}
             </span>
-            <span className="text-sm text-slate-900 line-through">
-              ${productPrice}
-            </span>
+            {featured ? (
+              <span className="text-sm text-slate-900 line-through">
+                ${productPrice}
+              </span>
+            ) : null}
           </p>
           <div className="flex items-center">
             {[1, 2, 3, 4, 5].map((star) => (
@@ -78,9 +87,9 @@ function Card({
             ))}
           </div>
         </div>
-        <a
-          href="#"
-          className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+        <NavLink
+          to="/"
+          className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -88,16 +97,16 @@ function Card({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            stroke-width="2"
+            strokeWidth="2"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
             />
           </svg>
           Add to Cart
-        </a>
+        </NavLink>
       </div>
     </div>
   );

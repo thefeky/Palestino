@@ -1,20 +1,23 @@
+import { NavLink } from "react-router";
+
 import logo from "/assets/shared/logo2.png";
 import qr from "/assets/shared/qr.svg";
+
 function Footer() {
   return (
-    <footer className="w-full bg-gray-300 flex h-30 md:h-60 bottom-0 text-sm xl:text-lg mt-auto">
+    <footer className="w-full bg-gray-300 flex mt-auto h-30 md:h-60 text-sm xl:text-lg">
       <div className="hidden md:flex md:justify-between xl:gap-50 md:mx-auto gap-12 py-6 md:px-8 xl:px-24">
         <ul className="flex flex-col gap-2 xl:gap-4 max-w-30 xl:max-w-50">
           <li className="">
-            <a href="#">
+            <NavLink to="/">
               <img src={logo} alt="logo" className="max-w-20 xl:max-w-30 " />
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="#">Subscribe</a>
+            <NavLink to="/">Subscribe</NavLink>
           </li>
           <li className="text-base">
-            <a href="#">Get 10% off your first order</a>
+            <NavLink to="/">Get 10% off your first order</NavLink>
           </li>
           <li className="relative flex-center gap-3">
             <i className="bx bx-send absolute right-2 text-2xl text-gray-500 cursor-pointer"></i>
@@ -27,52 +30,52 @@ function Footer() {
         </ul>
         <ul className="flex flex-col gap-2 xl:gap-4 xl:max-w-50">
           <li className="font-semibold">
-            <a href="#">Support</a>
+            <NavLink to="/">Support</NavLink>
           </li>
           <li>
-            <a href="#">Gaza, Palestine</a>
+            <NavLink to="/">Gaza, Palestine</NavLink>
           </li>
           <li>
-            <a href="#">gaza@palestine.com</a>
+            <NavLink to="/">gaza@palestine.com</NavLink>
           </li>
           <li>
-            <a href="#">+12345-67890</a>
+            <NavLink to="/">+12345-67890</NavLink>
           </li>
         </ul>
         <ul className="flex flex-col gap-2 xl:gap-4 xl:max-w-50">
           <li className=" font-semibold">
-            <a href="#">Account</a>
+            <NavLink to="/">Account</NavLink>
           </li>
           <li>
-            <a href="#">My Account</a>
+            <NavLink to="/">My Account</NavLink>
           </li>
           <li>
-            <a href="#">Login / Register</a>
+            <NavLink to="/">Login / Register</NavLink>
           </li>
           <li>
-            <a href="#">Shop</a>
+            <NavLink to="/">Shop</NavLink>
           </li>
         </ul>
         <ul className="flex flex-col gap-2 xl:gap-4 xl:max-w-50">
           <li className="font-semibold">
-            <a href="#">Quick Link</a>
+            <NavLink to="/">Quick Link</NavLink>
           </li>
           <li>
-            <a href="#">Privacy Policy</a>
+            <NavLink to="/">Privacy Policy</NavLink>
           </li>
           <li>
-            <a href="#">Terms Of Use</a>
+            <NavLink to="/">Terms Of Use</NavLink>
           </li>
           <li>
-            <a href="#">FAQ</a>
+            <NavLink to="/">FAQ</NavLink>
           </li>
         </ul>
         <ul className="flex flex-col gap-4 xl:max-w-50">
           <li className="font-semibold">
-            <a href="#">Download App</a>
+            <NavLink to="/">Download App</NavLink>
           </li>
           <li className="text-base font-semibold">
-            <a href="#">Save $3 with App</a>
+            <NavLink to="/">Save $3 with App</NavLink>
           </li>
           <ul className="flex gap-4">
             <li>
@@ -84,24 +87,24 @@ function Footer() {
             </li>
             <ul>
               <li>
-                <a href="#">
+                <NavLink to="/">
                   <i className="bx bxl-facebook"></i>
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#">
+                <NavLink to="/">
                   <i className="bx bxl-instagram"></i>
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#">
+                <NavLink to="/">
                   <i className="bx bxl-twitter"></i>
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="#">
+                <NavLink to="/">
                   <i className="bx bxl-whatsapp"></i>
-                </a>
+                </NavLink>
               </li>
             </ul>
           </ul>
@@ -110,7 +113,9 @@ function Footer() {
       <div className="md:hidden flex justify-between items-center mx-auto gap-8">
         <div>
           <img src={logo} alt="logo" className="max-w-30" />
-          <a className="font-semibold">Download App!</a>
+          <NavLink to="/" className="font-semibold">
+            Download App!
+          </NavLink>
         </div>
         <img src={qr} alt="qr" className="max-w-20" />
       </div>

@@ -1,6 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import Icon from "./Icon";
+
+interface IconListProps {
+  option: string;
+  color?: string;
+  size?: number;
+  iconSize?: number;
+  radius?: string;
+  border?: string;
+  includeNames?: boolean;
+  gap?: string;
+  includeDescription?: boolean;
+  classes?: string;
+}
 
 function IconList({
   option,
@@ -13,19 +27,9 @@ function IconList({
   includeNames,
   gap,
   includeDescription,
-}: {
-  option: string;
-  color?: string;
-  size?: number;
-  iconSize?: number;
-  radius?: string;
-  border?: string;
-  includeNames?: boolean;
-  gap?: string;
-  includeDescription?: boolean;
-  classes?: string;
-}) {
+}: IconListProps) {
   const [icons, setIcons] = useState([]);
+
   useEffect(() => {
     function fetchIcons() {
       axios

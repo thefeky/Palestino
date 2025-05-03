@@ -24,7 +24,13 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@lib/*": ["src/lib/*"],
+      "@routes/*": ["src/routes/*"],
+      "@layout/*": ["src/layout/*"],
+      "@assets/*": ["public/assets/*"]
     }
   },
   "include": ["src"]
