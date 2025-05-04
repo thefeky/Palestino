@@ -1,50 +1,52 @@
 import { NavLink } from "react-router";
 import Break from "@/components/shared/Break";
 import { Button } from "@/components/ui/button";
+import { useMediaQuery } from "react-responsive";
 
 function Contact() {
+  const isXl = useMediaQuery({ query: "(min-width: 1280px)" });
+
   return (
-    <main className="md:w-[90%] xl:w-[80%] mx-auto py-10">
+    <main className="w-[90%] xl:w-[80%] mx-auto py-10">
       <p className="text-black text-left relative">
         <NavLink to="/" className="text-black/50 ">
           Home
         </NavLink>{" "}
         / Contact
       </p>
-      <div className="my-10 flex-center gap-6">
-        <div className="w-[22%] flex flex-col gap-8 shadow-md py-11">
-          <div className="mx-auto flex flex-col w-[80%] gap-6">
-            <div className="flex items-center gap-4 font-[500]">
+      <div className="my-10 flex-center flex-col xl:flex-row gap-6">
+        <div className="w-[90%] xl:w-[22%] flex-center xl:flex-col gap-8 shadow-md py-11">
+          <div className="flex items-center flex-col xl:w-[80%] gap-6 h-50 w-80">
+            <div className="gap-4 font-[500] flex-center mr-auto ml-7">
               <div className="w-10 h-10 rounded-full bg-[#DB4444] flex-center">
                 <i className="bx bx-phone text-[#ffffff] scale-150"></i>
               </div>{" "}
               <p className="text-xl">Call Us</p>
             </div>
-            <div className="flex flex-col gap-4">
-              <p>We are available 24 hours, 7 days a week.</p>
+            <div className="flex w-[80%] flex-col gap-4">
+              <p className="w-[80%]">
+                We are available 24 hours, 7 days a week.
+              </p>
               <p>Phone: +12345-67890</p>
             </div>
           </div>
-          <Break percentage={90} gap={0} />
-          <div>
-            <div className="mx-auto flex flex-col w-[80%] gap-6">
-              <div className="flex items-center gap-4 font-[500]">
-                <div className="w-10 h-10 rounded-full bg-[#DB4444] flex-center">
-                  <i className="bx bx-envelope text-[#ffffff] scale-150"></i>
-                </div>{" "}
-                <p className="text-xl">Mail Us</p>
-              </div>
-              <div className="flex flex-col gap-4">
-                <p>
-                  Fill out our form and we will contact you within 24 hours.
-                </p>
-                <p>Emails: gaza@palestine.com</p>
-                <p>Emails: support@gaza.com</p>
-              </div>
+          {isXl && <Break percentage={90} gap={0} />}
+          {!isXl && <Break gap={0} percentage={90} horizontal={false} />}
+          <div className="flex items-center flex-col xl:w-[80%] gap-6 h-50 w-80">
+            <div className="gap-4 font-[500] flex-center mr-auto ml-7">
+              <div className="w-10 h-10 rounded-full bg-[#DB4444] flex-center">
+                <i className="bx bx-envelope text-[#ffffff] scale-150"></i>
+              </div>{" "}
+              <p className="text-xl">Mail Us</p>
+            </div>
+            <div className="flex w-[80%] flex-col gap-4">
+              <p>Fill out our form and we will contact you within 24 hours.</p>
+              <p>Emails: gaza@palestine.com</p>
+              <p>Emails: support@gaza.com</p>
             </div>
           </div>
         </div>
-        <div className="w-[78%] max-w-[900px] shadow-md py-11 h-[498px] flex flex-col gap-10">
+        <div className="w-[90%] max-w-[900px] shadow-md py-11 h-[498px] flex flex-col gap-10">
           <div className="mx-auto flex justify-between w-full max-w-[810px] gap-8">
             <input
               className="w-[30%] h-14 border-2 border-red-100 focus:outline-red-300 bg-gray-100 rounded-md px-3"

@@ -10,7 +10,7 @@ function Homepage() {
       <main className="md:w-[90%] xl:w-[80%] mx-auto py-10">
         <div className="gap-10 xl:gap-10 hidden md:flex md:h-90">
           <AccordionComp />
-          <Break horizontal={false} />
+          <Break horizontal={false} gap={0} />
           <CarouselComp width="w-[80%]" md="" lg="" />
         </div>
         <Section title="Today's" text="Flash Sales" onSale={true} />

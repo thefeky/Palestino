@@ -3,14 +3,15 @@ interface BreakProps {
   percentage?: number;
   gap?: number;
 }
-function Break({ horizontal = true, percentage = 100, gap = 8 }: BreakProps) {
+function Break({ horizontal = true, percentage = 100, gap = 32 }: BreakProps) {
   return (
     <div
-      className={`${
-        horizontal
-          ? `w-[${percentage}%] h-0.5 my-${gap}`
-          : `h-[${percentage}%] w-0.5`
-      } bg-gray-300 flex mx-auto`}
+      className={`${horizontal ? "h-0.5" : "w-0.5"} bg-gray-300 flex mx-auto`}
+      style={{
+        [horizontal ? "width" : "height"]: `${percentage}%`,
+        marginTop: `${gap}px`,
+        marginBottom: `${gap}px`,
+      }}
     ></div>
   );
 }

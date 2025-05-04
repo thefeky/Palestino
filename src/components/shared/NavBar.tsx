@@ -42,7 +42,9 @@ function NavBar() {
         <ul
           className={`xl:flex xl:flex-row items-center justify-center font-semibold xl:text-lg z-50 ${
             isMenuOpen
-              ? "absolute top-24 left-0 w-full bg-white flex flex-col items-center gap-6 text-lg pb-6 shadow-md"
+              ? `absolute top-24 ${
+                  location.pathname !== "/" ? "top-25" : "md:top-32"
+                } left-0 w-full bg-white flex flex-col items-center gap-6 text-lg pb-6 shadow-md`
               : "hidden gap-12"
           }`}
         >
