@@ -19,12 +19,12 @@ function Footer() {
           <li className="text-base">
             <NavLink to="/">Get 10% off your first order</NavLink>
           </li>
-          <li className="relative flex-center gap-3">
-            <i className="bx bx-send absolute right-2 text-2xl text-gray-500 cursor-pointer"></i>
+          <li className="relative flex-center gap-3 ml-5 xl:ml-0">
+            <i className="bx bx-send absolute left-25 xl:left-40 text-2xl text-gray-500 cursor-pointer"></i>
             <input
               type="text"
               placeholder="Enter your email"
-              className="w-45 md:w-70 mx-4 px-4 py-2 rounded-xl border-2 border-red-300 focus:outline-red-500 text-sm md:text-base bg-white"
+              className="w-45 xl:w-70 mx-4 px-4 py-2 rounded-xl border-2 border-red-300 focus:outline-red-500 text-sm md:text-base bg-white"
             ></input>
           </li>
         </ul>
