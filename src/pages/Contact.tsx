@@ -7,8 +7,8 @@ function Contact() {
   const isXl = useMediaQuery({ query: "(min-width: 1280px)" });
 
   return (
-    <main className="w-[90%] xl:w-[80%] mx-auto py-10">
-      <p className="text-black text-left relative">
+    <main className="w-[90%] xl:w-[80%] mx-auto py-8 xl:py-10">
+      <p className="text-black">
         <NavLink to="/" className="text-black/50 ">
           Home
         </NavLink>{" "}

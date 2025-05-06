@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 
 interface IconProps {
   subIcon: string;
@@ -6,58 +6,74 @@ interface IconProps {
   color?: string;
   size?: number;
   iconSize?: number;
-  radius?: string;
+  radius?: "xl" | "lg" | "md" | "sm" | "full";
   border?: string;
   includeNames?: boolean;
   includeDescription?: boolean;
   subDescription?: string;
   classes?: string;
+  nameSize?: number;
 }
+
+const radiusMap = {
+  xl: "rounded-xl",
+  lg: "rounded-lg",
+  md: "rounded-md",
+  sm: "rounded-sm",
+  full: "rounded-full",
+};
 
 function Icon({
   subIcon,
   subName,
-  color,
+  color = "transparent",
   size,
-  iconSize,
-  radius = "xl",
+  iconSize = 56,
+  radius,
   border = "border-2 border-black",
   includeNames = true,
   includeDescription = false,
   subDescription,
-  classes,
+  classes = "",
+  nameSize,
 }: IconProps) {
+  const bgColor = color ? `bg-${color}` : "";
+  const textColor = color === "black" ? "text-white" : "text-black";
+  const titleStyle = nameSize ? { fontSize: `${nameSize}px` } : {};
+
   return (
-    <NavLink to="/" className={`${classes} flex-center flex-col gap-6`}>
-      <div className={`flex items-center ${border} rounded-${radius}`}>
+    <NavLink to="/" className={`${classes} flex-center flex-col gap-4`}>
+      <div
+        className={`flex items-center ${border} ${
+          radius ? radiusMap[radius] : ""
+        }`}
+      >
         <div
+          style={size ? { width: `${size}px`, height: `${size}px` } : undefined}
           className={`${
-            size ? `w-[${size}px] h-[${size}px]` : "w-34 h-34 md:w-40 md:h-40"
-          } flex-center flex-col rounded-${radius} gap-2 bg-${color}`}
+            size ? "" : "w-34 h-34 md:w-40 md:h-40"
+          } flex-center flex-col ${
+            radius ? radiusMap[radius] : ""
+          } gap-2 ${bgColor}`}
         >
           <img
             src={subIcon}
-            className={`${
-              iconSize ? `w-${iconSize} h-${iconSize}` : "w-14 h-14"
-            }`}
+            style={{ width: `${iconSize}px`, height: `${iconSize}px` }}
+            alt={subName}
           />
-          {includeNames ? (
-            <span
-              className={`font-semibold text-${
-                color === "black" ? "white" : "black"
-              }`}
-            >
-              {subName}
-            </span>
-          ) : null}
+          {includeNames && (
+            <span className={`font-semibold ${textColor}`}>{subName}</span>
+          )}
         </div>
       </div>
-      {includeDescription ? (
-        <div className="flex-center flex-col gap-2">
-          <p className="font-semibold">{subName}</p>
-          <span className="text-xs font-semibold">{subDescription}</span>
+      {includeDescription && (
+        <div className="flex-center flex-col w-40">
+          <p className="font-semibold" style={titleStyle}>
+            {subName}
+          </p>
+          <span className="text-sm font-semibold">{subDescription}</span>
         </div>
-      ) : null}
+      )}
     </NavLink>
   );
 }

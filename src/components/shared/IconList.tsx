@@ -8,12 +8,13 @@ interface IconListProps {
   color?: string;
   size?: number;
   iconSize?: number;
-  radius?: string;
+  radius?: "xl" | "lg" | "md" | "sm" | "full";
   border?: string;
   includeNames?: boolean;
   gap?: string;
   includeDescription?: boolean;
   classes?: string;
+  nameSize?: number;
 }
 
 function IconList({
@@ -27,6 +28,7 @@ function IconList({
   includeNames,
   gap,
   includeDescription,
+  nameSize,
 }: IconListProps) {
   const [icons, setIcons] = useState([]);
 
@@ -41,7 +43,7 @@ function IconList({
   }, [option]);
 
   return (
-    <div className={`flex-center flex-wrap gap-6 ${gap} mx-auto`}>
+    <div className={`flex-center flex-wrap gap-6 ${gap} mx-auto ${classes}`}>
       {icons.map(
         (icon: {
           subIcon: string;
@@ -60,7 +62,7 @@ function IconList({
             includeNames={includeNames}
             subDescription={icon.subDescription}
             includeDescription={includeDescription}
-            classes={classes}
+            nameSize={nameSize}
           />
         )
       )}
