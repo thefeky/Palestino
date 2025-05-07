@@ -53,26 +53,26 @@ function Contact() {
               className="w-[90%] md:w-[30%] h-10 md:h-14 border-2 border-red-100 focus:outline-red-300 bg-gray-100 rounded-md px-3"
               type="text"
               placeholder="Your Name"
-            ></input>
+            />
             <input
               className="w-[90%] md:w-[30%] h-10 md:h-14 border-2 border-red-100 focus:outline-red-300 bg-gray-100 rounded-md px-3"
               type="text"
               placeholder="Your Email"
-            ></input>
+            />
             <input
               className="w-[90%] md:w-[30%] h-10 md:h-14 border-2 border-red-100 focus:outline-red-300 bg-gray-100 rounded-md px-3"
               type="text"
               placeholder="Your Phone"
-            ></input>
+            />
           </div>
           <div className="mx-auto w-full flex-center">
             <textarea
               className="w-[90%] h-30 md:h-50 border-2 border-red-100 focus:outline-red-300 bg-gray-100 rounded-md px-3 py-3 resize-none"
               placeholder="Your Message"
-            ></textarea>
+            />
           </div>
           <div className="w-full flex-center md:justify-end md:pr-9 xl:pr-11">
-            <Button className="bg-red-500 text-white hover:bg-red-600 w-[90%] md:w-[40%] xl:w-[30%] h-14 cursor-pointer font-semibold text-base">
+            <Button className="bg-[#DB4444] text-white hover:bg-red-500 w-[90%] md:w-[40%] xl:w-[30%] h-14 cursor-pointer font-semibold text-base">
               Send Message
             </Button>
           </div>
