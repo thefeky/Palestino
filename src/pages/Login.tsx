@@ -29,7 +29,7 @@ function Login() {
             <Button className="bg-[#DB4444] text-white hover:bg-red-500 w-full md:w-[40%] h-14 cursor-pointer font-semibold text-base">
               Log In
             </Button>
-            <NavLink to="/" className="text-[#DB4444] font-normal text-lg">
+            <NavLink to="/login" className="text-[#DB4444] font-normal text-lg">
               Forgot Password?
             </NavLink>
           </div>

@@ -1,5 +1,3 @@
-import { NavLink } from "react-router-dom";
-
 interface IconProps {
   subIcon: string;
   subName: string;
@@ -42,7 +40,7 @@ function Icon({
   const titleStyle = nameSize ? { fontSize: `${nameSize}px` } : {};
 
   return (
-    <NavLink to="/" className={`${classes} flex-center flex-col gap-4`}>
+    <div className={`${classes} flex-center flex-col gap-4`}>
       <div
         className={`flex items-center ${border} ${
           radius ? radiusMap[radius] : ""
@@ -74,7 +72,7 @@ function Icon({
           <span className="text-sm font-semibold">{subDescription}</span>
         </div>
       )}
-    </NavLink>
+    </div>
   );
 }
 
