@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 
 import logo from "/assets/shared/logo2.png";
-import qr from "/assets/shared/qr.svg";
+import qr from "/assets/shared/qr.png";
 
 function Footer() {
   return (

@@ -43,7 +43,7 @@ function IconList({
   }, [option]);
 
   return (
-    <div className={`flex-center flex-wrap gap-6 ${gap} mx-auto ${classes}`}>
+    <div className={`flex-center flex-wrap gap-6 ${gap} mx-auto`}>
       {icons.map(
         (icon: {
           subIcon: string;
@@ -63,6 +63,7 @@ function IconList({
             subDescription={icon.subDescription}
             includeDescription={includeDescription}
             nameSize={nameSize}
+            classes={classes}
           />
         )
       )}

@@ -72,7 +72,7 @@ function Contact() {
             ></textarea>
           </div>
           <div className="w-full flex-center md:justify-end md:pr-9 xl:pr-11">
-            <Button className="bg-red-500 text-white hover:bg-red-600 w-[90%] md:w-[40%] xl:w-[30%] h-14 cursor-pointer">
+            <Button className="bg-red-500 text-white hover:bg-red-600 w-[90%] md:w-[40%] xl:w-[30%] h-14 cursor-pointer font-semibold text-base">
               Send Message
             </Button>
           </div>

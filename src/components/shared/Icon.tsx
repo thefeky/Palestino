@@ -67,7 +67,7 @@ function Icon({
         </div>
       </div>
       {includeDescription && (
-        <div className="flex-center flex-col w-40">
+        <div className="flex-center flex-col text-center">
           <p className="font-semibold" style={titleStyle}>
             {subName}
           </p>
