@@ -15,6 +15,7 @@ function Login() {
           <SignUp
             oauthFlow="popup"
             signInUrl="/login"
+            forceRedirectUrl="/"
             appearance={{
               layout: { unsafe_disableDevelopmentModeWarnings: true },
               elements: {
@@ -30,6 +31,7 @@ function Login() {
         {!isXl && (
           <SignUp
             signInUrl="/login"
+            forceRedirectUrl="/"
             appearance={{
               layout: { unsafe_disableDevelopmentModeWarnings: true },
               elements: {
