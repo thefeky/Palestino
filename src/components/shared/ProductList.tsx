@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useMediaQuery } from "react-responsive";
 
-import Card from "./Card";
+import Card from "../homepage/Card";
 import { Button } from "../ui/button";
 
 interface Product {
@@ -23,7 +23,7 @@ interface ProductListProps {
   num?: number;
 }
 
-function ProductList({ onSale, num = 4 }: ProductListProps) {
+function ProductList({ onSale, num }: ProductListProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [showMore, setShowMore] = useState(false);
 

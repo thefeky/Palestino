@@ -1,24 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Homepage from "@/pages/Homepage";
 import Contact from "@/pages/Contact";
 import About from "@/pages/About";
 import Login from "@/pages/Login";
+import Register from "@/pages/Register";
 import RootLayout from "@/layout/RootLayout";
+import Shop from "@/pages/Shop";
+import Profile from "@/pages/Profile";
 
 const AppRoutes = () => {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<RootLayout />}>
-            <Route index element={<Homepage />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<Homepage />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+      </Routes>
     </>
   );
 };

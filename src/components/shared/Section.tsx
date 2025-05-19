@@ -1,4 +1,4 @@
-import ProductList from "@/components/homepage/ProductList";
+import ProductList from "@/components/shared/ProductList";
 
 interface SectionProps {
   title: string;
