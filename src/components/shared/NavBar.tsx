@@ -50,12 +50,20 @@ function NavBar() {
           >
             <SignedOut>
               <li>
-                <NavLink className="nav-link" to="/login">
+                <NavLink
+                  className="nav-link"
+                  to="/login"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   Log In
                 </NavLink>
               </li>
               <li>
-                <NavLink className="nav-link" to="/register">
+                <NavLink
+                  className="nav-link"
+                  to="/register"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   Register
                 </NavLink>
               </li>
