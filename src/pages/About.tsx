@@ -9,7 +9,7 @@ function About() {
       <p className="text-black">
         <NavLink to="/" className="text-black/50 ">
           Home
-        </NavLink>{" "}
+        </NavLink>
         / About
       </p>
       <div className="w-full flex-center flex-col xl:flex-row gap-2 md:gap-10 xl:mb-10">

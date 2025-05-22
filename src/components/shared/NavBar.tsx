@@ -11,7 +11,7 @@ import {
   SignedOut,
   SignOutButton,
   UserButton,
-} from "@clerk/react-router";
+} from "@clerk/clerk-react";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,7 +52,7 @@ function NavBar() {
               <li>
                 <NavLink
                   className="nav-link"
-                  to="/login"
+                  to="/sign-in"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Log In
@@ -61,7 +61,7 @@ function NavBar() {
               <li>
                 <NavLink
                   className="nav-link"
-                  to="/register"
+                  to="/sign-up"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Register

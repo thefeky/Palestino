@@ -1,4 +1,4 @@
-import { SignUp } from "@clerk/react-router";
+import { SignUp } from "@clerk/clerk-react";
 import { useMediaQuery } from "react-responsive";
 
 function Login() {
@@ -15,7 +15,6 @@ function Login() {
           <SignUp
             oauthFlow="popup"
             signInUrl="/login"
-            forceRedirectUrl="/"
             appearance={{
               layout: { unsafe_disableDevelopmentModeWarnings: true },
               elements: {
@@ -31,7 +30,6 @@ function Login() {
         {!isXl && (
           <SignUp
             signInUrl="/login"
-            forceRedirectUrl="/"
             appearance={{
               layout: { unsafe_disableDevelopmentModeWarnings: true },
               elements: {
