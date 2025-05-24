@@ -1,0 +1,127 @@
+// src/pages/Cart.tsx
+import { useCart } from "@/contexts/CartContext";
+
+function Cart() {
+  const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
+
+  const total = cart.reduce(
+    (acc, item) => acc + item.productPrice * item.quantity,
+    0
+  );
+
+  if (cart.length === 0) {
+    return <div className="text-center mt-10 text-lg">Your cart is empty.</div>;
+  }
+
+  return (
+    <div className="w-full max-w-3xl mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
+      <ul className="space-y-4">
+        {cart.map((item) => (
+          <li
+            key={item.productName}
+            className="flex items-center justify-between border-b pb-4"
+          >
+            <div className="flex items-center">
+              <img
+                src={item.productImage}
+                alt={item.productName}
+                className="w-20 h-20 object-cover mr-4 rounded"
+              />
+              <div>
+                <h2 className="text-lg font-semibold">{item.productName}</h2>
+                <p className="text-gray-600">
+                  ${item.productPrice.toFixed(2)} x {item.quantity}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() =>
+                    updateQuantity(item.productName, item.quantity - 1)
+                  }
+                  disabled={item.quantity === 1}
+                  className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 hover:text-white"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M20 12H4"
+                    />
+                  </svg>
+                </button>
+                <span className="font-semibold text-lg w-4 text-center">
+                  {item.quantity}
+                </span>
+                <button
+                  onClick={() =>
+                    updateQuantity(item.productName, item.quantity + 1)
+                  }
+                  disabled={
+                    typeof item.stock === "number" &&
+                    item.quantity >= item.stock
+                  }
+                  className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-200 disabled:hover:text-inherit"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <button
+                onClick={() => removeFromCart(item.productName)}
+                className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 group"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5 text-red-500 group-hover:text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3m5 0H6"
+                  />
+                </svg>
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-6 flex justify-between items-center">
+        <p className="text-xl font-semibold">Total: ${total.toFixed(2)}</p>
+        <button
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          onClick={clearCart}
+        >
+          Clear Cart
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default Cart;

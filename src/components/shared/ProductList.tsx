@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useMediaQuery } from "react-responsive";
 
-import Card from "../homepage/Card";
+import Card from "./Card";
 import { Button } from "../ui/button";
 
 interface Product {
@@ -58,7 +58,7 @@ function ProductList({ onSale, num }: ProductListProps) {
 
   return (
     <>
-      <div className="flex flex-wrap gap-5">
+      <div className="flex xl:mx-3 flex-wrap gap-5">
         {visibleProducts.map((product) => (
           <Card
             key={product.productName}
@@ -67,7 +67,7 @@ function ProductList({ onSale, num }: ProductListProps) {
             productPrice={product.productPrice}
             // productDetails={product.productDetails}
             // category={product.category}
-            // stock={product.stock}
+            stock={product.stock}
             rating={product.rating}
             // seller={product.seller}
             promotion={product.promotion}

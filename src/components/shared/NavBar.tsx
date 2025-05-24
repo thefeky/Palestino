@@ -12,6 +12,7 @@ import {
   SignOutButton,
   UserButton,
 } from "@clerk/clerk-react";
+import CartIcon from "./cartIcon";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -82,6 +83,13 @@ function NavBar() {
                   },
                 }}
               />
+              <NavLink
+                className="nav-link group"
+                to="/cart"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <CartIcon />
+              </NavLink>
             </SignedIn>
           </ul>
           <ul

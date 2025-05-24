@@ -9,6 +9,7 @@ import RootLayout from "@/layout/RootLayout";
 import Shop from "@/pages/Shop";
 import Profile from "@/pages/Profile";
 import { SignedIn } from "@clerk/clerk-react";
+import Cart from "@/pages/Cart";
 
 const AppRoutes = () => {
   return (
@@ -26,6 +27,14 @@ const AppRoutes = () => {
             element={
               <SignedIn>
                 <Profile />
+              </SignedIn>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <SignedIn>
+                <Cart />
               </SignedIn>
             }
           />
