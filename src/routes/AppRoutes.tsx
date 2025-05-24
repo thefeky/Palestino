@@ -8,6 +8,7 @@ import Register from "@/pages/Register";
 import RootLayout from "@/layout/RootLayout";
 import Shop from "@/pages/Shop";
 import Profile from "@/pages/Profile";
+import { SignedIn } from "@clerk/clerk-react";
 
 const AppRoutes = () => {
   return (
@@ -20,7 +21,9 @@ const AppRoutes = () => {
           <Route path="/about" element={<About />} />
           <Route path="/sign-in/*" element={<Login />} />
           <Route path="/sign-up/*" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <SignedIn>
+            <Route path="/profile" element={<Profile />} />
+          </SignedIn>
         </Route>
       </Routes>
     </>
