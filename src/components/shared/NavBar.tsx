@@ -70,8 +70,6 @@ function NavBar() {
             </SignedOut>
             <SignedIn>
               <UserButton
-                userProfileMode="navigation"
-                userProfileUrl="/profile"
                 showName
                 appearance={{
                   layout: { unsafe_disableDevelopmentModeWarnings: true },
@@ -109,7 +107,7 @@ function NavBar() {
               </NavLink>
             </li>
             <li>
-              <NavLink className="nav-link" to="/About" onClick={toggleMenu}>
+              <NavLink className="nav-link" to="/about" onClick={toggleMenu}>
                 About
               </NavLink>
             </li>

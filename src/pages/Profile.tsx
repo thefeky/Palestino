@@ -4,6 +4,8 @@ function Profile() {
   return (
     <main className="w-[90%] xl:w-[80%] mx-auto py-8 xl:py-10">
       <UserProfile
+        // routing="path"
+        path="/profile"
         appearance={{
           layout: { unsafe_disableDevelopmentModeWarnings: true },
           elements: { rootBox: "mx-auto!", cardBox: "w-350! h-150!" },
