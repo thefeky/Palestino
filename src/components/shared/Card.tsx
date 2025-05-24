@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import Swal from "sweetalert2";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "../ui/button";
 
@@ -30,25 +30,47 @@ function Card({
 
   const cartItem = cart.find((item) => item.productName === productName);
 
+  const handleAddToCart = () => {
+    addToCart({
+      name: productName,
+      price: featured ? priceAfterPromotion : productPrice,
+      image: productImage,
+      stock: stock,
+    });
+
+    Swal.fire({
+      toast: true,
+      icon: "success",
+      title: "Added to cart",
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 1200,
+    });
+  };
+
+  const handleIncreaseQuantity = () => {
+    if (cartItem && cartItem.quantity >= stock) {
+      return;
+    }
+    updateQuantity(productName, (cartItem?.quantity || 0) + 1);
+  };
+
   return (
     <div className="relative mx-5 h-100 md:w-full md:max-w-80 max-w-xs flex-col overflow-hidden rounded-lg border border-red-500 bg-white duration-500 ease-in-out xl:hover:scale-105 hover:shadow-md hover:shadow-gray-500">
-      <NavLink
-        className="relative mx-3 mt-3 flex-center h-50 w-auto overflow-hidden rounded-xl"
-        to="/"
-      >
+      <div className="relative mx-3 mt-3 flex-center h-50 w-auto overflow-hidden rounded-xl">
         <img className="h-40" src={productImage} alt={productName} />
         {featured ? (
           <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
             {promotion}% OFF
           </span>
         ) : null}
-      </NavLink>
+      </div>
       <div className="mt-4 px-5 pb-5">
-        <NavLink to="/">
+        <div>
           <h5 className="text-xl tracking-tight text-slate-900">
             {productName}
           </h5>
-        </NavLink>
+        </div>
         <div className="mt-2 mb-5 flex items-center justify-between">
           <p>
             <span className="text-3xl font-bold text-slate-900 mr-1 xl:mr-3">
@@ -96,10 +118,20 @@ function Card({
           </div>
         </div>
         {cartItem ? (
-          <div className="flex-center gap-8 outline-1 rounded-full outline-red-500 p-1 w-[90%] mx-auto">
+          <div className="flex-center gap-6 outline-1 rounded-full outline-red-500 p-1 mx-auto">
             {cartItem.quantity <= 1 ? (
               <button
-                onClick={() => removeFromCart(productName)}
+                onClick={() => {
+                  removeFromCart(productName);
+                  Swal.fire({
+                    toast: true,
+                    icon: "success",
+                    title: "Item removed",
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 1200,
+                  });
+                }}
                 className="w-8 h-8 bg-gray-200 rounded flex-center hover:bg-red-500 group"
               >
                 <svg
@@ -127,9 +159,11 @@ function Card({
                 −
               </button>
             )}
-            <span className="font-semibold text-lg">{cartItem.quantity}</span>
+            <span className="font-semibold text-lg w-4 text-center">
+              {cartItem.quantity}
+            </span>
             <button
-              onClick={() => updateQuantity(productName, cartItem.quantity + 1)}
+              onClick={handleIncreaseQuantity}
               disabled={cartItem.quantity >= stock}
               className="w-8 h-8 bg-gray-200 rounded flex-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-200 disabled:hover:text-inherit"
             >
@@ -151,14 +185,7 @@ function Card({
           </div>
         ) : (
           <Button
-            onClick={() =>
-              addToCart({
-                name: productName,
-                price: featured ? priceAfterPromotion : productPrice,
-                image: productImage,
-                stock: stock,
-              })
-            }
+            onClick={handleAddToCart}
             className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 w-full"
           >
             <svg

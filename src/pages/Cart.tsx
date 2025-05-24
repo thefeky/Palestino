@@ -1,5 +1,6 @@
-// src/pages/Cart.tsx
+import Swal from "sweetalert2";
 import { useCart } from "@/contexts/CartContext";
+import { Link } from "react-router";
 
 function Cart() {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
@@ -10,7 +11,14 @@ function Cart() {
   );
 
   if (cart.length === 0) {
-    return <div className="text-center mt-10 text-lg">Your cart is empty.</div>;
+    return (
+      <div className="text-center mt-10 text-lg font-semibold">
+        Your cart is empty.{" "}
+        <Link to="/shop" className="text-red-500 underline">
+          Shop now!
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -115,7 +123,19 @@ function Cart() {
         <p className="text-xl font-semibold">Total: ${total.toFixed(2)}</p>
         <button
           className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-          onClick={clearCart}
+          onClick={() => {
+            Swal.fire({
+              title: "Are you sure?",
+              text: "This will remove all items from your cart.",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#ef4444",
+              cancelButtonColor: "#6b7280",
+              confirmButtonText: "Yes, clear it!",
+            }).then((result) => {
+              if (result.isConfirmed) clearCart();
+            });
+          }}
         >
           Clear Cart
         </button>

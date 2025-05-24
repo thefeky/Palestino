@@ -12,7 +12,7 @@ import {
   SignOutButton,
   UserButton,
 } from "@clerk/clerk-react";
-import CartIcon from "./cartIcon";
+import CartIcon from "@/components/shared/CartIcon";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
