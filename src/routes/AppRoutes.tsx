@@ -21,9 +21,15 @@ const AppRoutes = () => {
           <Route path="/about" element={<About />} />
           <Route path="/sign-in/*" element={<Login />} />
           <Route path="/sign-up/*" element={<Register />} />
-          <SignedIn>
-            <Route path="/profile" element={<Profile />} />
-          </SignedIn>
+
+          <Route
+            path="/profile"
+            element={
+              <SignedIn>
+                <Profile />
+              </SignedIn>
+            }
+          />
         </Route>
       </Routes>
     </>
