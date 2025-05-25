@@ -33,6 +33,13 @@ function Card({
   const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
   const { openModal } = useProductModal();
 
+  const priceAfterPromotion = +(
+    productPrice -
+    (productPrice * promotion) / 100
+  ).toFixed(2);
+
+  const cartItem = cart.find((item) => item.productID === productID);
+
   const handleOpen = () =>
     openModal({
       id: productID,
@@ -48,21 +55,25 @@ function Card({
       featured,
     });
 
-  const priceAfterPromotion = +(
-    productPrice -
-    (productPrice * promotion) / 100
-  ).toFixed(2);
-
-  const cartItem = cart.find((item) => item.productID === productID);
-
   const handleAddToCart = () => {
-    addToCart({
+    const success = addToCart({
       id: productID,
       name: productName,
       price: featured ? priceAfterPromotion : productPrice,
       image: productImage,
       stock: stock,
     });
+
+    if (!success) {
+      return Swal.fire({
+        toast: true,
+        icon: "warning",
+        title: "Please sign in to add to cart!",
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 1200,
+      });
+    }
 
     Swal.fire({
       toast: true,
@@ -75,9 +86,7 @@ function Card({
   };
 
   const handleIncreaseQuantity = () => {
-    if (cartItem && cartItem.quantity >= stock) {
-      return;
-    }
+    if (cartItem && cartItem.quantity >= stock) return;
     updateQuantity(productID, (cartItem?.quantity || 0) + 1);
   };
 
@@ -88,28 +97,26 @@ function Card({
         onClick={handleOpen}
       >
         <img className="h-40" src={productImage} alt={productName} />
-        {featured ? (
+        {featured && (
           <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
             {promotion}% OFF
           </span>
-        ) : null}
+        )}
       </div>
+
       <div className="mt-4 px-5 pb-5">
-        <div>
-          <h5 className="text-xl tracking-tight text-slate-900">
-            {productName}
-          </h5>
-        </div>
+        <h5 className="text-xl tracking-tight text-slate-900">{productName}</h5>
+
         <div className="mt-2 mb-5 flex items-center justify-between">
           <p>
             <span className="text-3xl font-bold text-slate-900 mr-1 xl:mr-3">
               ${priceAfterPromotion}
             </span>
-            {featured ? (
+            {featured && (
               <span className="text-sm text-slate-900 line-through">
                 ${productPrice}
               </span>
-            ) : null}
+            )}
           </p>
           <div className="flex items-center">
             {[1, 2, 3, 4, 5].map((star) => (
@@ -146,6 +153,7 @@ function Card({
             ))}
           </div>
         </div>
+
         {cartItem ? (
           <div className="flex-center gap-6 outline-1 rounded-full outline-red-500 p-1 mx-auto">
             {cartItem.quantity <= 1 ? (

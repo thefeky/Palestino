@@ -1,4 +1,3 @@
-// src/context/CartContext.tsx
 import {
   createContext,
   useContext,
@@ -7,7 +6,7 @@ import {
   ReactNode,
 } from "react";
 import { useUser } from "@clerk/clerk-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 interface CartItem {
   productID: string;
@@ -29,7 +28,7 @@ interface CartContextType {
       stock: number;
     },
     quantity?: number
-  ): void;
+  ): boolean;
   removeFromCart(productID: string): void;
   updateQuantity(productID: string, quantity: number): void;
   clearCart(): void;
@@ -43,9 +42,9 @@ interface CartProviderProps {
 
 function CartProvider({ children }: CartProviderProps) {
   const { user, isLoaded } = useUser();
-  const navigate = useNavigate();
   const userId = user?.id;
   const storageKey = userId ? `cart_${userId}` : null;
+  const navigate = useNavigate();
 
   const [cart, setCart] = useState<CartItem[]>([]);
 
@@ -70,11 +69,12 @@ function CartProvider({ children }: CartProviderProps) {
       stock: number;
     },
     quantity: number = 1
-  ): void {
+  ): boolean {
     if (!userId) {
       navigate("/sign-in");
-      return;
+      return false;
     }
+
     setCart((prev) => {
       const existing = prev.find((item) => item.productID === product.id);
       if (existing) {
@@ -96,6 +96,8 @@ function CartProvider({ children }: CartProviderProps) {
         },
       ];
     });
+
+    return true;
   }
 
   function removeFromCart(productID: string): void {

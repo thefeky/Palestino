@@ -34,13 +34,27 @@ function ProductModal({ product, onClose }: ProductModalProps) {
   const cartItem = cart.find((item) => item.productID === id);
 
   const handleAddToCart = () => {
-    addToCart({
+    const success = addToCart({
       id,
       name,
       price: featured ? priceAfterPromotion : price,
       image,
       stock,
     });
+
+    if (!success) {
+      return (
+        onClose(),
+        Swal.fire({
+          toast: true,
+          icon: "warning",
+          title: "Please sign in to add to cart!",
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 1200,
+        })
+      );
+    }
 
     Swal.fire({
       toast: true,
@@ -73,7 +87,7 @@ function ProductModal({ product, onClose }: ProductModalProps) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.7 }}
               transition={{ duration: 0.4 }}
-              className="bg-white rounded-lg shadow-xl max-w-5xl h-120 w-full overflow-hidden"
+              className="bg-white rounded-lg shadow-xl max-w-5xl h-110 xl:h-120 w-full overflow-hidden"
             >
               <div className="flex justify-between items-center p-4 border-b">
                 <h2 className="text-xl font-semibold">{name}</h2>
@@ -88,9 +102,9 @@ function ProductModal({ product, onClose }: ProductModalProps) {
                 <img
                   src={image}
                   alt={name}
-                  className="w-full md:w-1/2 h-90 object-cover rounded"
+                  className="hidden md:block w-auto md:h-70 xl:h-90 object-cover rounded"
                 />
-                <div className="flex flex-col gap-4 w-full">
+                <div className="flex flex-col gap-3 xl:gap-4 w-full">
                   <p className="text-lg font-medium h-20">{description}</p>
                   <p className="text-xl font-bold text-slate-900">
                     ${priceAfterPromotion}
@@ -213,7 +227,7 @@ function ProductModal({ product, onClose }: ProductModalProps) {
                   ) : (
                     <Button
                       onClick={handleAddToCart}
-                      className="flex items-center w-[80%] mx-auto justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4"
+                      className="mt-4 flex items-center w-[80%] mx-auto justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

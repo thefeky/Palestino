@@ -85,25 +85,25 @@ function Footer() {
                 className="max-w-30 border-2 border-red-500"
               />
             </li>
-            <ul>
+            <ul className="flex flex-col gap-3">
               <li>
                 <NavLink to="/">
-                  <i className="bx bxl-facebook"></i>
+                  <i className="bx bxl-facebook scale-150"></i>
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/">
-                  <i className="bx bxl-instagram"></i>
+                  <i className="bx bxl-instagram scale-150"></i>
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/">
-                  <i className="bx bxl-twitter"></i>
+                  <i className="bx bxl-twitter scale-150"></i>
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/">
-                  <i className="bx bxl-whatsapp"></i>
+                  <i className="bx bxl-whatsapp scale-150"></i>
                 </NavLink>
               </li>
             </ul>
