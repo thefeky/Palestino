@@ -28,7 +28,7 @@ function Cart() {
       <ul className="space-y-4">
         {cart.map((item) => (
           <li
-            key={item.productName}
+            key={item.productID}
             className="flex items-center justify-between border-b pb-4"
           >
             <div className="flex items-center flex-col md:flex-row">
@@ -48,10 +48,10 @@ function Cart() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() =>
-                    updateQuantity(item.productName, item.quantity - 1)
+                    updateQuantity(item.productID, item.quantity - 1)
                   }
                   disabled={item.quantity === 1}
-                  className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 hover:text-white"
+                  className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-200 disabled:hover:text-inherit"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@ function Cart() {
                 </span>
                 <button
                   onClick={() =>
-                    updateQuantity(item.productName, item.quantity + 1)
+                    updateQuantity(item.productID, item.quantity + 1)
                   }
                   disabled={
                     typeof item.stock === "number" &&
@@ -98,7 +98,7 @@ function Cart() {
                 </button>
               </div>
               <Button
-                onClick={() => removeFromCart(item.productName)}
+                onClick={() => removeFromCart(item.productID)}
                 className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 group"
               >
                 <svg

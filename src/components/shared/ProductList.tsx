@@ -6,10 +6,11 @@ import Card from "./Card";
 import { Button } from "../ui/button";
 
 interface Product {
+  productID: string;
   productName: string;
   productImage: string;
   productPrice: number;
-  productDetails: string;
+  description: string;
   category: string;
   stock: number;
   rating: number;
@@ -61,15 +62,16 @@ function ProductList({ onSale, num }: ProductListProps) {
       <div className="flex-center xl:mx-3 flex-wrap gap-5">
         {visibleProducts.map((product) => (
           <Card
-            key={product.productName}
+            key={product.productID}
+            productID={product.productID}
             productImage={product.productImage}
             productName={product.productName}
             productPrice={product.productPrice}
-            // productDetails={product.productDetails}
-            // category={product.category}
+            description={product.description}
+            category={product.category}
             stock={product.stock}
             rating={product.rating}
-            // seller={product.seller}
+            seller={product.seller}
             promotion={product.promotion}
             featured={product.featured}
           />

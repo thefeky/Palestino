@@ -1,37 +1,63 @@
 import Swal from "sweetalert2";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "../ui/button";
+import { useProductModal } from "@/contexts/ProductModalContext";
 
 interface CardProps {
+  productID: string;
   productName: string;
   productImage: string;
+  description: string;
   promotion: number;
   featured?: boolean;
   productPrice: number;
   rating: number;
   stock: number;
+  category: string;
+  seller: string;
 }
 
 function Card({
+  productID,
   productName,
   productImage,
+  description,
   promotion,
   featured,
   productPrice,
   rating,
   stock,
+  category,
+  seller,
 }: CardProps) {
   const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
+  const { openModal } = useProductModal();
+
+  const handleOpen = () =>
+    openModal({
+      id: productID,
+      name: productName,
+      image: productImage,
+      description,
+      promotion,
+      price: productPrice,
+      rating,
+      stock,
+      category,
+      seller,
+      featured,
+    });
 
   const priceAfterPromotion = +(
     productPrice -
     (productPrice * promotion) / 100
   ).toFixed(2);
 
-  const cartItem = cart.find((item) => item.productName === productName);
+  const cartItem = cart.find((item) => item.productID === productID);
 
   const handleAddToCart = () => {
     addToCart({
+      id: productID,
       name: productName,
       price: featured ? priceAfterPromotion : productPrice,
       image: productImage,
@@ -52,12 +78,15 @@ function Card({
     if (cartItem && cartItem.quantity >= stock) {
       return;
     }
-    updateQuantity(productName, (cartItem?.quantity || 0) + 1);
+    updateQuantity(productID, (cartItem?.quantity || 0) + 1);
   };
 
   return (
     <div className="relative mx-auto xl:mx-5 w-[90%] h-100 md:max-w-80 max-w-xs overflow-hidden rounded-lg border border-red-500 bg-white duration-500 ease-in-out xl:hover:scale-105 hover:shadow-md hover:shadow-gray-500">
-      <div className="relative mx-3 mt-3 flex-center h-50 w-auto overflow-hidden rounded-xl">
+      <div
+        className="relative mx-3 mt-3 flex-center h-50 w-auto overflow-hidden rounded-xl cursor-pointer"
+        onClick={handleOpen}
+      >
         <img className="h-40" src={productImage} alt={productName} />
         {featured ? (
           <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
@@ -122,7 +151,7 @@ function Card({
             {cartItem.quantity <= 1 ? (
               <button
                 onClick={() => {
-                  removeFromCart(productName);
+                  removeFromCart(productID);
                   Swal.fire({
                     toast: true,
                     icon: "success",
@@ -151,9 +180,7 @@ function Card({
               </button>
             ) : (
               <button
-                onClick={() =>
-                  updateQuantity(productName, cartItem.quantity - 1)
-                }
+                onClick={() => updateQuantity(productID, cartItem.quantity - 1)}
                 className="w-8 h-8 bg-gray-200 rounded flex-center hover:bg-red-500 hover:text-white"
               >
                 −

@@ -10,6 +10,7 @@ import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 
 interface CartItem {
+  productID: string;
   productName: string;
   productPrice: number;
   productImage: string;
@@ -20,21 +21,21 @@ interface CartItem {
 interface CartContextType {
   cart: CartItem[];
   addToCart(
-    product: { name: string; price: number; image: string; stock: number },
+    product: {
+      id: string;
+      name: string;
+      price: number;
+      image: string;
+      stock: number;
+    },
     quantity?: number
   ): void;
-  removeFromCart(productName: string): void;
-  updateQuantity(productName: string, quantity: number): void;
+  removeFromCart(productID: string): void;
+  updateQuantity(productID: string, quantity: number): void;
   clearCart(): void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
-
-function useCart(): CartContextType {
-  const context = useContext(CartContext);
-  if (!context) throw new Error("useCart must be used within a CartProvider");
-  return context;
-}
 
 interface CartProviderProps {
   children: ReactNode;
@@ -61,7 +62,13 @@ function CartProvider({ children }: CartProviderProps) {
   }, [cart, userId, storageKey]);
 
   function addToCart(
-    product: { name: string; price: number; image: string; stock: number },
+    product: {
+      id: string;
+      name: string;
+      price: number;
+      image: string;
+      stock: number;
+    },
     quantity: number = 1
   ): void {
     if (!userId) {
@@ -69,10 +76,10 @@ function CartProvider({ children }: CartProviderProps) {
       return;
     }
     setCart((prev) => {
-      const existing = prev.find((item) => item.productName === product.name);
+      const existing = prev.find((item) => item.productID === product.id);
       if (existing) {
         return prev.map((item) =>
-          item.productName === product.name
+          item.productID === product.id
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
@@ -80,6 +87,7 @@ function CartProvider({ children }: CartProviderProps) {
       return [
         ...prev,
         {
+          productID: product.id,
           productName: product.name,
           productPrice: product.price,
           productImage: product.image,
@@ -90,14 +98,14 @@ function CartProvider({ children }: CartProviderProps) {
     });
   }
 
-  function removeFromCart(productName: string): void {
-    setCart((prev) => prev.filter((item) => item.productName !== productName));
+  function removeFromCart(productID: string): void {
+    setCart((prev) => prev.filter((item) => item.productID !== productID));
   }
 
-  function updateQuantity(productName: string, quantity: number): void {
+  function updateQuantity(productID: string, quantity: number): void {
     setCart((prev) =>
       prev.map((item) => {
-        if (item.productName !== productName) return item;
+        if (item.productID !== productID) return item;
 
         const safeQuantity =
           typeof item.stock === "number"
@@ -122,6 +130,12 @@ function CartProvider({ children }: CartProviderProps) {
       {children}
     </CartContext.Provider>
   );
+}
+
+function useCart(): CartContextType {
+  const context = useContext(CartContext);
+  if (!context) throw new Error("useCart must be used within a CartProvider");
+  return context;
 }
 
 export { CartProvider, useCart };

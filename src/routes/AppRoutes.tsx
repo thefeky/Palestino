@@ -10,8 +10,12 @@ import Shop from "@/pages/Shop";
 import Profile from "@/pages/Profile";
 import { SignedIn } from "@clerk/clerk-react";
 import Cart from "@/pages/Cart";
+import { useProductModal } from "@/contexts/ProductModalContext";
+import ProductModal from "@/components/shared/ProductModal";
 
 const AppRoutes = () => {
+  const { product, isOpen, closeModal } = useProductModal();
+
   return (
     <>
       <Routes>
@@ -40,6 +44,9 @@ const AppRoutes = () => {
           />
         </Route>
       </Routes>
+      {isOpen && product && (
+        <ProductModal product={product} onClose={closeModal} />
+      )}
     </>
   );
 };
