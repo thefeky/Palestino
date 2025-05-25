@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { useCart } from "@/contexts/CartContext";
 import { Link } from "react-router";
+import { Button } from "@/components/ui/button";
 
 function Cart() {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
@@ -22,7 +23,7 @@ function Cart() {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4">
+    <main className="w-[90%] max-w-6xl mx-auto py-10">
       <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
       <ul className="space-y-4">
         {cart.map((item) => (
@@ -30,7 +31,7 @@ function Cart() {
             key={item.productName}
             className="flex items-center justify-between border-b pb-4"
           >
-            <div className="flex items-center">
+            <div className="flex items-center flex-col md:flex-row">
               <img
                 src={item.productImage}
                 alt={item.productName}
@@ -96,7 +97,7 @@ function Cart() {
                   </svg>
                 </button>
               </div>
-              <button
+              <Button
                 onClick={() => removeFromCart(item.productName)}
                 className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 group"
               >
@@ -114,12 +115,12 @@ function Cart() {
                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3m5 0H6"
                   />
                 </svg>
-              </button>
+              </Button>
             </div>
           </li>
         ))}
       </ul>
-      <div className="mt-6 flex justify-between items-center">
+      <div className="mt-6 justify-between items-center flex">
         <p className="text-xl font-semibold">Total: ${total.toFixed(2)}</p>
         <button
           className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
@@ -140,7 +141,7 @@ function Cart() {
           Clear Cart
         </button>
       </div>
-    </div>
+    </main>
   );
 }
 

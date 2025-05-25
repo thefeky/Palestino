@@ -56,7 +56,7 @@ function Card({
   };
 
   return (
-    <div className="relative mx-5 h-100 md:w-full md:max-w-80 max-w-xs flex-col overflow-hidden rounded-lg border border-red-500 bg-white duration-500 ease-in-out xl:hover:scale-105 hover:shadow-md hover:shadow-gray-500">
+    <div className="relative mx-auto xl:mx-5 w-[90%] h-100 md:max-w-80 max-w-xs overflow-hidden rounded-lg border border-red-500 bg-white duration-500 ease-in-out xl:hover:scale-105 hover:shadow-md hover:shadow-gray-500">
       <div className="relative mx-3 mt-3 flex-center h-50 w-auto overflow-hidden rounded-xl">
         <img className="h-40" src={productImage} alt={productName} />
         {featured ? (

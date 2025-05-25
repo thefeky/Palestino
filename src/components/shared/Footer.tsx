@@ -5,12 +5,12 @@ import qr from "/assets/shared/qr.png";
 
 function Footer() {
   return (
-    <footer className="w-full bg-gray-300 flex mt-auto h-30 md:h-60 text-sm xl:text-lg">
-      <div className="hidden md:flex md:justify-between xl:gap-50 md:mx-auto gap-12 py-6 md:px-8 xl:px-24">
+    <footer className="w-full bg-gray-300 flex mt-auto h-30 md:h-60 text-sm xl:text-md">
+      <div className="hidden md:flex md:justify-between xl:gap-40 md:mx-auto gap-12 py-6 md:px-8">
         <ul className="flex flex-col gap-2 xl:gap-4 max-w-30 xl:max-w-50">
           <li className="">
             <NavLink to="/">
-              <img src={logo} alt="logo" className="max-w-20 xl:max-w-30 " />
+              <img src={logo} alt="logo" className="max-w-20 xl:max-w-40 " />
             </NavLink>
           </li>
           <li>
@@ -70,7 +70,7 @@ function Footer() {
             <NavLink to="/">FAQ</NavLink>
           </li>
         </ul>
-        <ul className="flex flex-col gap-4 xl:max-w-50">
+        <ul className="flex flex-col gap-3 xl:max-w-50">
           <li className="font-semibold">
             <NavLink to="/">Download App</NavLink>
           </li>
