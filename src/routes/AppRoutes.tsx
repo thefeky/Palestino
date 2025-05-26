@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { SignedIn } from "@clerk/clerk-react";
+import { SignedIn, SignedOut } from "@clerk/react-router";
 
 import RootLayout from "@/layout/RootLayout";
 import Homepage from "@/pages/Homepage";
@@ -27,8 +27,22 @@ const AppRoutes = () => {
           <Route path="/shop" element={<Shop />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/sign-in/*" element={<Login />} />
-          <Route path="/sign-up/*" element={<Register />} />
+          <Route
+            path="/sign-in/*"
+            element={
+              <SignedOut>
+                <Login />
+              </SignedOut>
+            }
+          />
+          <Route
+            path="/sign-up/*"
+            element={
+              <SignedOut>
+                <Register />
+              </SignedOut>
+            }
+          />
           <Route
             path="/profile"
             element={

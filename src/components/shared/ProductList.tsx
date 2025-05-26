@@ -48,18 +48,18 @@ function ProductList({ onSale, num }: ProductListProps) {
     fetchProducts();
   }, [onSale]);
 
-  const duoFix = useMediaQuery({
+  const resFix = useMediaQuery({
     minWidth: 1100,
-    maxWidth: 1279,
+    maxWidth: 1576,
   });
 
   const visibleProducts = showMore
     ? products
-    : products.slice(0, duoFix ? 3 : num);
+    : products.slice(0, resFix ? 3 : num);
 
   return (
     <>
-      <div className="flex-center xl:mx-3 flex-wrap gap-5">
+      <div className="flex-center flex-wrap gap-5">
         {visibleProducts.map((product) => (
           <Card
             key={product.productID}
