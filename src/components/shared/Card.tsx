@@ -1,7 +1,9 @@
 import Swal from "sweetalert2";
+
 import { useCart } from "@/contexts/CartContext";
-import { Button } from "../ui/button";
 import { useProductModal } from "@/contexts/ProductModalContext";
+
+import { Button } from "../ui/button";
 
 interface CardProps {
   productID: string;

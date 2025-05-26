@@ -1,9 +1,10 @@
 import { Button, Dialog } from "@headlessui/react";
 import { Fragment } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Swal from "sweetalert2";
+
 import type { ProductDetails } from "@/contexts/ProductModalContext";
 import { useCart } from "@/contexts/CartContext";
-import Swal from "sweetalert2";
 
 interface ProductModalProps {
   product: ProductDetails | null;

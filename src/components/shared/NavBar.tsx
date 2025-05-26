@@ -1,17 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-
-import logo from "/assets/shared/icon.svg";
-import logo2 from "/assets/shared/logo2.png";
-import triangle from "/assets/shared/Red_Triangle.svg";
-import Banner from "./Banner";
 import {
   SignedIn,
   SignedOut,
   SignOutButton,
   UserButton,
 } from "@clerk/clerk-react";
+
+import logo from "/assets/shared/icon.svg";
+import logo2 from "/assets/shared/logo2.png";
+import triangle from "/assets/shared/Red_Triangle.svg";
+import Banner from "./Banner";
 import CartIcon from "@/components/shared/CartIcon";
 
 function NavBar() {
@@ -47,7 +47,7 @@ function NavBar() {
             />
           </NavLink>
           <ul
-            className={`flex flex-row items-center justify-center font-semibold xl:text-lg z-50 xl:w-60 xl:order-1 gap-6`}
+            className={`flex flex-row items-center justify-center font-semibold xl:text-lg z-50 xl:order-1 gap-6`}
           >
             <SignedOut>
               <li>
@@ -90,6 +90,13 @@ function NavBar() {
               >
                 <CartIcon />
               </NavLink>
+              <NavLink
+                className="hidden md:block nav-link"
+                to="/orders"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Orders
+              </NavLink>
             </SignedIn>
           </ul>
           <ul
@@ -121,6 +128,15 @@ function NavBar() {
             </li>
             {!isXl && (
               <SignedIn>
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    to="/orders"
+                    onClick={toggleMenu}
+                  >
+                    Orders
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     className="nav-link"

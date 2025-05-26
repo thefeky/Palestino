@@ -1,7 +1,9 @@
 import Swal from "sweetalert2";
-import { useCart } from "@/contexts/CartContext";
 import { Link } from "react-router";
+
 import { Button } from "@/components/ui/button";
+
+import { useCart } from "@/contexts/CartContext";
 
 function Cart() {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
@@ -120,10 +122,13 @@ function Cart() {
           </li>
         ))}
       </ul>
-      <div className="mt-6 justify-between items-center flex">
-        <p className="text-xl font-semibold">Total: ${total.toFixed(2)}</p>
-        <button
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+      <p className="text-xl font-semibold text-center mt-4">
+        Total: ${total.toFixed(2)}
+      </p>
+
+      <div className="flex-center flex-col md:flex-row mt-6 md:justify-end gap-4 md:gap-8 items-center">
+        <Button
+          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-70 md:w-50 h-10 order-1 md:order-0"
           onClick={() => {
             Swal.fire({
               title: "Are you sure?",
@@ -139,7 +144,12 @@ function Cart() {
           }}
         >
           Clear Cart
-        </button>
+        </Button>
+        <Link to="/checkout">
+          <Button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-70 md:w-50 h-10">
+            Proceed to Checkout
+          </Button>
+        </Link>
       </div>
     </main>
   );

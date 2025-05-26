@@ -1,7 +1,8 @@
 import { NavLink } from "react-router";
+import { useMediaQuery } from "react-responsive";
+
 import Break from "@/components/shared/Break";
 import { Button } from "@/components/ui/button";
-import { useMediaQuery } from "react-responsive";
 
 function Contact() {
   const isXl = useMediaQuery({ query: "(min-width: 1280px)" });

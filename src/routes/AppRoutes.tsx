@@ -1,17 +1,20 @@
 import { Routes, Route } from "react-router-dom";
+import { SignedIn } from "@clerk/clerk-react";
 
+import RootLayout from "@/layout/RootLayout";
 import Homepage from "@/pages/Homepage";
 import Contact from "@/pages/Contact";
 import About from "@/pages/About";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
-import RootLayout from "@/layout/RootLayout";
 import Shop from "@/pages/Shop";
 import Profile from "@/pages/Profile";
-import { SignedIn } from "@clerk/clerk-react";
 import Cart from "@/pages/Cart";
+import Checkout from "@/pages/Checkout";
+
 import { useProductModal } from "@/contexts/ProductModalContext";
 import ProductModal from "@/components/shared/ProductModal";
+import Orders from "@/pages/Orders";
 
 const AppRoutes = () => {
   const { product, isOpen, closeModal } = useProductModal();
@@ -39,6 +42,22 @@ const AppRoutes = () => {
             element={
               <SignedIn>
                 <Cart />
+              </SignedIn>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <SignedIn>
+                <Checkout />
+              </SignedIn>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <SignedIn>
+                <Orders />
               </SignedIn>
             }
           />
