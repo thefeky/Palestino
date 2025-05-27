@@ -12,7 +12,7 @@ const categories = [
   "Home & Furniture",
   "Groceries & Food",
   "Sports & Outdoors",
-  "Watches & Jewelry",
+  "Watches & Jewellery",
 ];
 
 function Shop() {
