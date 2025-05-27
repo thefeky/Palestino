@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
 
 import Card from "./Card";
 import { Button } from "../ui/button";
@@ -20,54 +21,73 @@ interface Product {
 }
 
 interface ProductListProps {
-  onSale?: boolean;
+  featuredFilter?: boolean;
+  categoryFilter?: string;
   num?: number;
   searchQuery?: string;
   disableResponsiveLimit?: boolean;
 }
 
 function ProductList({
-  onSale,
+  featuredFilter,
+  categoryFilter,
   num = 8,
   searchQuery,
   disableResponsiveLimit = false,
 }: ProductListProps) {
   const [products, setProducts] = useState<Product[]>([]);
-  const [showMore, setShowMore] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const resFix = useMediaQuery({ minWidth: 1005, maxWidth: 1430 });
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
     axios
       .get("/assets/products.json")
       .then((res) => {
-        const rawProducts: Product[] = res.data.products;
-        const filteredBySale =
-          onSale !== undefined
-            ? rawProducts.filter((product) => product.featured === onSale)
-            : rawProducts;
+        let rawProducts: Product[] = res.data.products;
 
-        const filteredBySearch = searchQuery
-          ? filteredBySale.filter((product) => {
-              const q = searchQuery.toLowerCase();
-              return (
-                product.productName.toLowerCase().includes(q) ||
-                product.category.toLowerCase().includes(q)
-              );
-            })
-          : filteredBySale;
+        if (featuredFilter !== undefined) {
+          rawProducts = rawProducts.filter(
+            (product) => product.featured === featuredFilter
+          );
+        }
 
-        setProducts(filteredBySearch);
+        if (categoryFilter && categoryFilter.trim() !== "") {
+          rawProducts = rawProducts.filter(
+            (product) =>
+              product.category.toLowerCase() === categoryFilter.toLowerCase()
+          );
+        }
+
+        if (searchQuery && searchQuery.trim() !== "") {
+          const q = searchQuery.toLowerCase();
+          rawProducts = rawProducts.filter(
+            (product) =>
+              product.productName.toLowerCase().includes(q) ||
+              product.category.toLowerCase().includes(q)
+          );
+        }
+
+        setProducts(rawProducts);
       })
       .catch((err) => console.error("Error fetching products:", err))
       .finally(() => setIsLoading(false));
-  }, [onSale, searchQuery]);
+  }, [featuredFilter, categoryFilter, searchQuery]);
 
-  const resFix = useMediaQuery({ minWidth: 1005, maxWidth: 1430 });
+  const visibleProducts = products.slice(
+    0,
+    disableResponsiveLimit ? num : resFix ? 3 : num
+  );
 
-  const visibleProducts = showMore
-    ? products
-    : products.slice(0, disableResponsiveLimit ? num : resFix ? 3 : num);
+  const handleShowMoreClick = () => {
+    if (featuredFilter === true) {
+      navigate("/shop?featured=true");
+    } else {
+      navigate("/shop");
+    }
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -95,9 +115,9 @@ function ProductList({
               <Button
                 aria-label="Show more products"
                 className="mx-auto mt-8 cursor-pointer bg-red-600 text-white hover:bg-red-700"
-                onClick={() => setShowMore(!showMore)}
+                onClick={handleShowMoreClick}
               >
-                {showMore ? "Show less" : "Show more"}
+                Show more
               </Button>
             </div>
           )}

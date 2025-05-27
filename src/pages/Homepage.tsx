@@ -44,7 +44,7 @@ function Homepage() {
         <Section
           title="Today's"
           text="Flash Sales"
-          onSale={true}
+          featuredFilter={true}
           num={FLASH_SALE_COUNT}
         />
         <Break />
@@ -64,7 +64,7 @@ function Homepage() {
         <Section
           title="This Month"
           text="Best Selling Products"
-          onSale={false}
+          featuredFilter={false}
           num={BESTSELLER_COUNT}
         />
         <Break />

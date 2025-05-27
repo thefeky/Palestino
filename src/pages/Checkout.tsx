@@ -20,12 +20,18 @@ const schema = z.object({
   cardNumber: z
     .string()
     .transform((val) => val.replace(/\s/g, ""))
-    .refine((val) => /^4[0-9]{12}(?:[0-9]{3})?$/.test(val), {
-      message: "Invalid VISA card number.",
-    }),
+    .refine(
+      (val) =>
+        /^(4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$/.test(
+          val
+        ),
+      {
+        message: "Invalid credit card number.",
+      }
+    ),
   expMonth: z.string().regex(/^(0[1-9]|1[0-2])$/, "MM must be 01-12"),
   expYear: z.string().regex(/^\d{2}$/, "YY must be 2 digits"),
-  cvc: z.string().regex(/^\d{3}$/, "Invalid CVC."),
+  cvc: z.string().regex(/^\d{3,4}$/, "Invalid CVC."),
 });
 
 const formatCardNumber = (val: string) =>
@@ -234,7 +240,7 @@ function Checkout() {
                     e.target.value = formatCardNumber(e.target.value);
                     register("cardNumber").onChange(e);
                   }}
-                  placeholder="e.g. 4111 1111 1111 1111"
+                  placeholder="e.g. 1234 5678 1234 5678"
                   className="w-full border px-3 py-2 rounded"
                 />
                 {errors.cardNumber && (

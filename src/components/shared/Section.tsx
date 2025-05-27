@@ -3,7 +3,8 @@ import ProductList from "@/components/shared/ProductList";
 interface SectionProps {
   title: string;
   text: string;
-  onSale?: boolean;
+  featuredFilter?: boolean;
+  categoryFilter?: string;
   num?: number;
   productSection?: boolean;
   searchQuery?: string;
@@ -13,7 +14,8 @@ interface SectionProps {
 function Section({
   title,
   text,
-  onSale,
+  featuredFilter,
+  categoryFilter,
   num,
   productSection = true,
   searchQuery,
@@ -22,8 +24,8 @@ function Section({
   return (
     <div>
       <div className="mb-2 flex-center flex-col gap-2 md:my-4 md:flex-row md:items-center md:justify-start md:gap-3">
-        <span className="order-1 h-1 w-20 rounded-sm bg-red-500 md:h-10 md:w-5"></span>
-        <h1 className="order-1 inline flex-center text-xl font-bold text-red-500">
+        <span className="order-1 md:order-0 h-1 w-20 rounded-sm bg-red-500 md:h-10 md:w-5"></span>
+        <h1 className="inline flex-center text-xl font-bold text-red-500">
           {title}
         </h1>
       </div>
@@ -35,7 +37,8 @@ function Section({
       {productSection && (
         <ProductList
           num={num}
-          onSale={onSale}
+          featuredFilter={featuredFilter}
+          categoryFilter={categoryFilter}
           searchQuery={searchQuery}
           disableResponsiveLimit={disableResponsiveLimit}
         />
