@@ -28,7 +28,7 @@ function CarouselComp({
       <Carousel plugins={plugins} className={width}>
         <CarouselContent className="h-70">
           <CarouselItem className={`${md} ${lg}`}>
-            <img loading="lazy" src={img1} alt="img1" />
+            <img loading="eager" src={img1} alt="img1" />
           </CarouselItem>
           <CarouselItem className={`${md} ${lg}`}>
             <img loading="lazy" src={img2} alt="img1" />

@@ -8,7 +8,11 @@ function Login() {
         name="description"
         content="Create your Palestino account to shop, save favorites, and track orders."
       />
-      <link rel="canonical" href="https://palestino.com/sign-up" />
+      <link
+        rel="canonical"
+        href="https://palestino.com/sign-up"
+        aria-label="register"
+      />
 
       <main className="mx-auto w-[90%] xl:w-[80%] py-8 xl:py-10">
         <div className="w-full flex-center flex-col xl:flex-row gap-2 md:gap-20 md:my-10">

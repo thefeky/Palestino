@@ -82,7 +82,7 @@ function ProductList({
               ? Array.from({ length: num }).map((_, i) => (
                   <div
                     key={i}
-                    className="w-[90%] md:max-w-80 h-100 bg-gray-200 animate-pulse rounded-lg"
+                    className="w-[90%] md:max-w-80 h-100 bg-gray-300 animate-pulse rounded-lg"
                   />
                 ))
               : visibleProducts.map((product) => (
@@ -93,6 +93,7 @@ function ProductList({
           {!isLoading && products.length >= 8 && (
             <div className="flex justify-center">
               <Button
+                aria-label="Show more products"
                 className="mx-auto mt-8 cursor-pointer bg-red-500 text-white hover:bg-red-600"
                 onClick={() => setShowMore(!showMore)}
               >

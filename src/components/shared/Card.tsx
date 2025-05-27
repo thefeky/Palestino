@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
-import { useCart } from "@/contexts/CartContext";
-import { useProductModal } from "@/contexts/ProductModalContext";
-import { useWishlist } from "@/contexts/WishlistContext";
+import { useCart } from "@/context/CartContext";
+import { useProductModal } from "@/context/ProductModalContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
@@ -121,9 +121,10 @@ function Card({
         mdResFix ? "md:w-80" : "md:w-[30%] md:min-w-70 md:max-w-80"
       } ${
         xlResFix ? "xl:w-80" : "xl:w-[20%] xl:min-w-70 xl:max-w-80"
-      } overflow-hidden rounded-lg border border-red-500 bg-white duration-500 ease-in-out hover:shadow-md hover:shadow-gray-500 xl:hover:scale-105`}
+      } overflow-hidden rounded-lg border border-red-500 bg-white duration-500 ease-in-out hover:shadow-md hover:shadow-gray-700 xl:hover:scale-105`}
     >
       <motion.button
+        aria-label="Add to wishlist"
         whileTap={{ scale: 0.8, rotate: 15 }}
         whileHover={{ scale: 1.2 }}
         onClick={() => {
@@ -195,7 +196,7 @@ function Card({
       </div>
 
       <div className="mt-4 px-5 pb-5">
-        <h5 className="text-xl tracking-tight text-slate-900">{productName}</h5>
+        <p className="text-xl tracking-tight text-slate-900">{productName}</p>
 
         <div className="mb-5 mt-2 flex items-center justify-between">
           <p>
@@ -247,7 +248,8 @@ function Card({
         {cartItem ? (
           <div className="mx-auto flex-center gap-6 rounded-full p-1 outline-1 outline-red-500">
             {cartItem.quantity <= 1 ? (
-              <button
+              <Button
+                aria-label="Remove item from cart"
                 onClick={() => {
                   removeFromCart(productID);
                   Swal.fire({
@@ -259,7 +261,7 @@ function Card({
                     timer: 1200,
                   });
                 }}
-                className="flex-center h-8 w-8 rounded bg-gray-200 hover:bg-red-500 group"
+                className="flex-center h-8 w-8 rounded bg-gray-300 hover:bg-red-500 group"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -275,22 +277,24 @@ function Card({
                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3m5 0H6"
                   />
                 </svg>
-              </button>
+              </Button>
             ) : (
-              <button
+              <Button
+                aria-label="Decrease quantity"
                 onClick={() => updateQuantity(productID, cartItem.quantity - 1)}
-                className="flex-center h-8 w-8 rounded bg-gray-200 hover:bg-red-500 hover:text-white"
+                className="flex-center h-8 w-8 rounded bg-gray-300 hover:bg-red-500 hover:text-white"
               >
                 −
-              </button>
+              </Button>
             )}
             <span className="w-4 text-center text-lg font-semibold">
               {cartItem.quantity}
             </span>
-            <button
+            <Button
+              aria-label="Increase quantity"
               onClick={handleIncreaseQuantity}
               disabled={cartItem.quantity >= stock}
-              className="flex-center h-8 w-8 rounded bg-gray-200 hover:bg-red-500 hover:text-white disabled:hover:bg-gray-200 disabled:hover:text-inherit"
+              className="flex-center h-8 w-8 rounded bg-gray-300 hover:bg-red-500 hover:text-white disabled:hover:bg-gray-300 disabled:hover:text-inherit"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -306,10 +310,11 @@ function Card({
                   d="M12 4v16m8-8H4"
                 />
               </svg>
-            </button>
+            </Button>
           </div>
         ) : (
           <Button
+            aria-label="Add to cart"
             onClick={handleAddToCart}
             className="w-full rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4"
           >

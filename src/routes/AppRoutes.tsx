@@ -13,7 +13,7 @@ import About from "@/pages/About";
 import Cart from "@/pages/Cart";
 import Wishlist from "@/pages/Wishlist";
 
-import { useProductModal } from "@/contexts/ProductModalContext";
+import { useProductModal } from "@/context/ProductModalContext";
 import ProductModal from "@/components/shared/ProductModal";
 import Spinner from "@/components/shared/Spinner";
 

@@ -11,7 +11,7 @@ function Break({ horizontal = true, percentage = 100, gap = 32 }: BreakProps) {
 
   return (
     <div
-      className="bg-gray-300 mx-auto"
+      className="bg-gray-700 mx-auto"
       style={{
         ...dimensionStyle,
         marginTop: `${gap}px`,

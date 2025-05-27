@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 
 function Cart() {
@@ -24,7 +24,7 @@ function Cart() {
 
         <div className="text-center mt-10 text-lg font-semibold">
           Your cart is empty.{" "}
-          <Link to="/shop" className="text-red-500 underline">
+          <Link to="/shop" className="text-red-500 underline" aria-label="shop">
             Shop now!
           </Link>
         </div>
@@ -39,7 +39,11 @@ function Cart() {
         name="description"
         content="Review your selected items and proceed to checkout on Palestino."
       />
-      <link rel="canonical" href="https://palestino.com/cart" />
+      <link
+        rel="canonical"
+        href="https://palestino.com/cart"
+        aria-label="cart"
+      />
 
       <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
 
@@ -58,7 +62,7 @@ function Cart() {
               />
               <div>
                 <h2 className="text-lg font-semibold">{item.productName}</h2>
-                <p className="text-gray-600">
+                <p className="text-gray-700">
                   ${item.productPrice.toFixed(2)} x {item.quantity}
                 </p>
               </div>
@@ -66,12 +70,13 @@ function Cart() {
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <button
+                <Button
+                  aria-label="Decrease quantity"
                   onClick={() =>
                     updateQuantity(item.productID, item.quantity - 1)
                   }
                   disabled={item.quantity === 1}
-                  className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-200 disabled:hover:text-inherit"
+                  className="w-8 h-8 bg-gray-300 rounded flex items-center justify-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-300 disabled:hover:text-inherit"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -87,13 +92,14 @@ function Cart() {
                       d="M20 12H4"
                     />
                   </svg>
-                </button>
+                </Button>
 
                 <span className="font-semibold text-lg w-4 text-center">
                   {item.quantity}
                 </span>
 
-                <button
+                <Button
+                  aria-label="Increase quantity"
                   onClick={() =>
                     updateQuantity(item.productID, item.quantity + 1)
                   }
@@ -101,7 +107,7 @@ function Cart() {
                     typeof item.stock === "number" &&
                     item.quantity >= item.stock
                   }
-                  className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-200 disabled:hover:text-inherit"
+                  className="w-8 h-8 bg-gray-300 rounded flex items-center justify-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-300 disabled:hover:text-inherit"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -117,12 +123,13 @@ function Cart() {
                       d="M12 4v16m8-8H4"
                     />
                   </svg>
-                </button>
+                </Button>
               </div>
 
               <Button
+                aria-label="Remove item"
                 onClick={() => removeFromCart(item.productID)}
-                className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 group"
+                className="w-8 h-8 bg-gray-300 rounded flex items-center justify-center hover:bg-red-500 group"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -150,6 +157,7 @@ function Cart() {
 
       <div className="flex-center flex-col md:flex-row mt-6 md:justify-end gap-4 md:gap-8 items-center">
         <Button
+          aria-label="Clear cart"
           className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-70 md:w-50 h-10 order-1 md:order-0"
           onClick={() => {
             Swal.fire({
@@ -168,8 +176,11 @@ function Cart() {
           Clear Cart
         </Button>
 
-        <Link to="/checkout">
-          <Button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-70 md:w-50 h-10">
+        <Link to="/checkout" aria-label="Proceed to checkout">
+          <Button
+            aria-label="Proceed to checkout"
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-70 md:w-50 h-10"
+          >
             Proceed to Checkout
           </Button>
         </Link>

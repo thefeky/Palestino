@@ -1,10 +1,12 @@
-import { Button, Dialog } from "@headlessui/react";
+import { Dialog } from "@headlessui/react";
 import { Fragment } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Swal from "sweetalert2";
 
-import type { ProductDetails } from "@/contexts/ProductModalContext";
-import { useCart } from "@/contexts/CartContext";
+import type { ProductDetails } from "@/context/ProductModalContext";
+import { useCart } from "@/context/CartContext";
+
+import { Button } from "../ui/button";
 
 interface ProductModalProps {
   product: ProductDetails | null;
@@ -92,12 +94,13 @@ function ProductModal({ product, onClose }: ProductModalProps) {
             >
               <div className="flex justify-between items-center p-4 border-b">
                 <h2 className="text-xl font-semibold">{name}</h2>
-                <button
+                <Button
+                  aria-label="Close modal"
                   onClick={onClose}
                   className="text-gray-500 hover:text-red-500"
                 >
                   &#10005;
-                </button>
+                </Button>
               </div>
               <div className="flex flex-col md:flex-row p-4 gap-6">
                 <img
@@ -163,7 +166,8 @@ function ProductModal({ product, onClose }: ProductModalProps) {
                   {cartItem ? (
                     <div className="flex-center gap-6 outline-1 rounded-full outline-red-500 p-1 mx-auto w-50">
                       {cartItem.quantity <= 1 ? (
-                        <button
+                        <Button
+                          aria-label="Remove item from cart"
                           onClick={() => {
                             removeFromCart(id);
                             Swal.fire({
@@ -175,7 +179,7 @@ function ProductModal({ product, onClose }: ProductModalProps) {
                               timer: 1200,
                             });
                           }}
-                          className="w-8 h-8 bg-gray-200 rounded flex-center hover:bg-red-500 group"
+                          className="w-8 h-8 bg-gray-300 rounded flex-center hover:bg-red-500 group"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -191,24 +195,26 @@ function ProductModal({ product, onClose }: ProductModalProps) {
                               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3m5 0H6"
                             />
                           </svg>
-                        </button>
+                        </Button>
                       ) : (
-                        <button
+                        <Button
+                          aria-label="Decrease quantity"
                           onClick={() =>
                             updateQuantity(id, cartItem.quantity - 1)
                           }
-                          className="w-8 h-8 bg-gray-200 rounded flex-center hover:bg-red-500 hover:text-white"
+                          className="w-8 h-8 bg-gray-300 rounded flex-center hover:bg-red-500 hover:text-white"
                         >
                           −
-                        </button>
+                        </Button>
                       )}
                       <span className="font-semibold text-lg w-4 text-center">
                         {cartItem.quantity}
                       </span>
-                      <button
+                      <Button
+                        aria-label="Increase quantity"
                         onClick={handleIncreaseQuantity}
                         disabled={cartItem.quantity >= stock}
-                        className="w-8 h-8 bg-gray-200 rounded flex-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-200 disabled:hover:text-inherit"
+                        className="w-8 h-8 bg-gray-300 rounded flex-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-300 disabled:hover:text-inherit"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -224,10 +230,11 @@ function ProductModal({ product, onClose }: ProductModalProps) {
                             d="M12 4v16m8-8H4"
                           />
                         </svg>
-                      </button>
+                      </Button>
                     </div>
                   ) : (
                     <Button
+                      aria-label="Add to cart"
                       onClick={handleAddToCart}
                       className="mt-4 flex items-center w-[80%] mx-auto justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4"
                     >

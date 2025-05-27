@@ -29,10 +29,14 @@ function About() {
         name="description"
         content="Learn about Palestino's story, mission, and leadership."
       />
-      <link rel="canonical" href="https://palestino.com/about" />
+      <link
+        rel="canonical"
+        href="https://palestino.com/about"
+        aria-label="about"
+      />
 
       <p className="text-black mb-4">
-        <Link to="/" className="text-black/50">
+        <Link to="/" aria-label="home" className="text-black/50">
           Home
         </Link>{" "}
         / About

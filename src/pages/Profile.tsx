@@ -8,7 +8,11 @@ function Profile() {
         name="description"
         content="Manage your profile settings and account preferences on Palestino."
       />
-      <link rel="canonical" href="https://palestino.com/profile" />
+      <link
+        rel="canonical"
+        href="https://palestino.com/profile"
+        aria-label="profile"
+      />
 
       <main className="mx-auto w-[90%] xl:w-[80%] py-8 xl:py-10">
         <UserProfile

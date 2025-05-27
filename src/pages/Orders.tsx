@@ -47,14 +47,14 @@ function Orders() {
         <h1 className="text-2xl font-bold mb-6">My Orders</h1>
 
         {orders.length === 0 ? (
-          <p className="text-gray-600">You haven’t placed any orders yet.</p>
+          <p className="text-gray-700">You haven’t placed any orders yet.</p>
         ) : (
           <div className="space-y-4">
             {orders.map((order) => (
-              <div key={order.id} className="border p-4 rounded-md bg-gray-50">
+              <div key={order.id} className="border p-4 rounded-md bg-gray-100">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-2 gap-2">
                   <h2 className="font-semibold text-lg">Order #{order.id}</h2>
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-700">
                     {new Date(order.createdAt).toLocaleString()}
                   </span>
                 </div>

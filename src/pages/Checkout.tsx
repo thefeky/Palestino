@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { useUser } from "@clerk/clerk-react";
 
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/contexts/CartContext";
+import { useCart } from "@/context/CartContext";
 
 const schema = z.object({
   phone: z
@@ -105,8 +105,8 @@ function Checkout() {
               ))}
             </ul>
             <div className="pt-2 md:pt-4">
-              <p className="text-gray-600">Subtotal: ${subtotal.toFixed(2)}</p>
-              <p className="text-gray-600">
+              <p className="text-gray-700">Subtotal: ${subtotal.toFixed(2)}</p>
+              <p className="text-gray-700">
                 Shipping: ${shippingFee.toFixed(2)}
               </p>
               <p className="font-bold text-lg mt-1">
@@ -263,7 +263,7 @@ function Checkout() {
 
             <div className="flex-center flex-col md:flex-row mt-4 md:justify-end gap-4 md:gap-8 items-center">
               <Button
-                type="button"
+                aria-label="Cancel checkout"
                 className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-55 md:w-30 xl:w-50 h-10 order-1 md:order-0"
                 onClick={() => {
                   Swal.fire({
@@ -283,6 +283,7 @@ function Checkout() {
               </Button>
 
               <Button
+                aria-label="Place order"
                 onClick={handleSubmit((data: FormData) => {
                   const previousOrders =
                     JSON.parse(

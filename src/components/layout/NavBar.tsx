@@ -37,7 +37,11 @@ function NavBar() {
             isMenuOpen ? "shadow-none" : "shadow-md"
           }`}
         >
-          <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
+          <NavLink
+            to="/"
+            aria-label="logo"
+            onClick={() => setIsMenuOpen(false)}
+          >
             <img
               loading="lazy"
               src={isMd ? logo2 : logo}
@@ -50,6 +54,7 @@ function NavBar() {
             <SignedOut>
               <li>
                 <NavLink
+                  aria-label="sign-in"
                   className="nav-link"
                   to="/sign-in"
                   onClick={() => setIsMenuOpen(false)}
@@ -59,6 +64,7 @@ function NavBar() {
               </li>
               <li>
                 <NavLink
+                  aria-label="sign-up"
                   className="nav-link"
                   to="/sign-up"
                   onClick={() => setIsMenuOpen(false)}
@@ -70,6 +76,7 @@ function NavBar() {
 
             <SignedIn>
               <NavLink
+                aria-label="orders"
                 className="nav-link hidden xl:block"
                 to="/orders"
                 onClick={() => setIsMenuOpen(false)}
@@ -77,6 +84,7 @@ function NavBar() {
                 Orders
               </NavLink>
               <NavLink
+                aria-label="wishlist"
                 className="nav-link hidden xl:block"
                 to="/wishlist"
                 onClick={() => setIsMenuOpen(false)}
@@ -97,6 +105,7 @@ function NavBar() {
                 }}
               />
               <NavLink
+                aria-label="cart"
                 className="nav-link group"
                 to="/cart"
                 onClick={() => setIsMenuOpen(false)}
@@ -114,22 +123,42 @@ function NavBar() {
             }`}
           >
             <li>
-              <NavLink className="nav-link" to="/" onClick={toggleMenu}>
+              <NavLink
+                aria-label="home"
+                className="nav-link"
+                to="/"
+                onClick={toggleMenu}
+              >
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink className="nav-link" to="/shop" onClick={toggleMenu}>
+              <NavLink
+                aria-label="shop"
+                className="nav-link"
+                to="/shop"
+                onClick={toggleMenu}
+              >
                 Shop
               </NavLink>
             </li>
             <li>
-              <NavLink className="nav-link" to="/contact" onClick={toggleMenu}>
+              <NavLink
+                aria-label="contact"
+                className="nav-link"
+                to="/contact"
+                onClick={toggleMenu}
+              >
                 Contact
               </NavLink>
             </li>
             <li>
-              <NavLink className="nav-link" to="/about" onClick={toggleMenu}>
+              <NavLink
+                aria-label="about"
+                className="nav-link"
+                to="/about"
+                onClick={toggleMenu}
+              >
                 About
               </NavLink>
             </li>
@@ -138,6 +167,7 @@ function NavBar() {
               <SignedIn>
                 <li>
                   <NavLink
+                    aria-label="orders"
                     className="nav-link"
                     to="/orders"
                     onClick={toggleMenu}
@@ -147,6 +177,7 @@ function NavBar() {
                 </li>
                 <li>
                   <NavLink
+                    aria-label="wishlist"
                     className="nav-link"
                     to="/wishlist"
                     onClick={toggleMenu}
@@ -156,6 +187,7 @@ function NavBar() {
                 </li>
                 <li>
                   <NavLink
+                    aria-label="profile"
                     className="nav-link"
                     to="/profile"
                     onClick={toggleMenu}
@@ -165,7 +197,12 @@ function NavBar() {
                 </li>
                 <li>
                   <SignOutButton>
-                    <NavLink className="nav-link" to="/" onClick={toggleMenu}>
+                    <NavLink
+                      aria-label="logout"
+                      className="nav-link"
+                      to="/"
+                      onClick={toggleMenu}
+                    >
                       Logout
                     </NavLink>
                   </SignOutButton>

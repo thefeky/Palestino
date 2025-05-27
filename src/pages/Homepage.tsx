@@ -22,7 +22,7 @@ function Homepage() {
         name="description"
         content="Browse flash sales, categories, and top-selling products on Palestino."
       />
-      <link rel="canonical" href={canonicalUrl} />
+      <link rel="canonical" href={canonicalUrl} aria-label="homepage" />
 
       <main className="mx-auto py-10 md:w-[90%] xl:w-[85%]">
         <Suspense

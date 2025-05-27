@@ -71,11 +71,15 @@ function Contact() {
         name="description"
         content="Get in touch with Palestino for support, inquiries, or feedback. We're here to help 24/7."
       />
-      <link rel="canonical" href="https://palestino.com/contact" />
+      <link
+        rel="canonical"
+        href="https://palestino.com/contact"
+        aria-label="contact"
+      />
 
       <main className="mx-auto w-[90%] xl:w-[80%] py-8 xl:py-10">
         <p className="text-black">
-          <Link to="/" className="text-black/50">
+          <Link to="/" className="text-black/50" aria-label="home">
             Home
           </Link>{" "}
           / Contact
@@ -186,7 +190,10 @@ function Contact() {
             </div>
 
             <div className="flex-center flex-col md:flex-row mt-4 md:justify-end gap-4 md:gap-8 items-center">
-              <Button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-55 md:w-30 xl:w-50 h-10">
+              <Button
+                aria-label="Send Message"
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-55 md:w-30 xl:w-50 h-10"
+              >
                 Send Message
               </Button>
             </div>

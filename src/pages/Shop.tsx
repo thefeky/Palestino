@@ -23,7 +23,7 @@ function Shop() {
         name="description"
         content="Browse our curated selection of quality products on Palestino."
       />
-      <link rel="canonical" href={canonicalUrl} />
+      <link rel="canonical" href={canonicalUrl} aria-label="shop" />
 
       <main className="mx-auto py-10 md:w-[90%] xl:w-[85%]">
         <div className="relative flex-center gap-3 pb-4">
