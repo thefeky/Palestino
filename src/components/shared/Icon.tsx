@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface IconProps {
   subIcon: string;
   subName: string;
@@ -11,6 +13,7 @@ interface IconProps {
   subDescription?: string;
   classes?: string;
   nameSize?: number;
+  linkify?: boolean;
 }
 
 const radiusMap = {
@@ -20,6 +23,10 @@ const radiusMap = {
   sm: "rounded-sm",
   full: "rounded-full",
 };
+
+function encodeCategoryName(name: string): string {
+  return name.replace(/&/g, "%26").replace(/ /g, "+");
+}
 
 function Icon({
   subIcon,
@@ -34,12 +41,13 @@ function Icon({
   subDescription,
   classes = "",
   nameSize,
+  linkify = false,
 }: IconProps) {
   const bgColor = color ? `bg-${color}` : "";
   const textColor = color === "black" ? "text-white" : "text-black";
   const titleStyle = nameSize ? { fontSize: `${nameSize}px` } : {};
 
-  return (
+  const content = (
     <div className={`${classes} flex-center flex-col gap-4`}>
       <div
         className={`flex items-center ${border} ${
@@ -75,6 +83,22 @@ function Icon({
       )}
     </div>
   );
+
+  if (linkify) {
+    const encodedName = encodeCategoryName(subName);
+    const url = `/shop?search=${encodedName}`;
+    return (
+      <Link
+        to={url}
+        className={`flex flex-col items-center cursor-pointer ${classes}`}
+        aria-label={`Shop ${subName}`}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 }
 
 export default Icon;

@@ -94,7 +94,7 @@ function ProductList({
             <div className="flex justify-center">
               <Button
                 aria-label="Show more products"
-                className="mx-auto mt-8 cursor-pointer bg-red-500 text-white hover:bg-red-600"
+                className="mx-auto mt-8 cursor-pointer bg-red-600 text-white hover:bg-red-700"
                 onClick={() => setShowMore(!showMore)}
               >
                 {showMore ? "Show less" : "Show more"}

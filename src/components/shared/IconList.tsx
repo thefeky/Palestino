@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { useEffect, useState } from "react";
 import Icon from "./Icon";
 
 interface IconListProps {
@@ -15,6 +14,7 @@ interface IconListProps {
   includeDescription?: boolean;
   classes?: string;
   nameSize?: number;
+  linkify?: boolean; // NEW prop
 }
 
 function IconList({
@@ -29,6 +29,7 @@ function IconList({
   gap,
   includeDescription,
   nameSize,
+  linkify = false, // default false
 }: IconListProps) {
   const [icons, setIcons] = useState([]);
 
@@ -64,6 +65,7 @@ function IconList({
             includeDescription={includeDescription}
             nameSize={nameSize}
             classes={classes}
+            linkify={linkify} // pass prop down
           />
         )
       )}

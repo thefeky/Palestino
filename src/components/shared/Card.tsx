@@ -177,7 +177,7 @@ function Card({
 
         <div className="mb-5 mt-2 flex items-center justify-between">
           <p>
-            <span className="mr-1 text-2xl font-bold text-slate-900">
+            <span className="mr-1 text-2xl font-bold text-slate-900 xl:mr-3">
               ${priceAfterPromotion}
             </span>
             {featured && (

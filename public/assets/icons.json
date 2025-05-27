@@ -1,36 +1,36 @@
 {
-  "subcategories": [
+  "categories": [
     {
-      "subName": "Phones",
-      "subIcon": "https://img.icons8.com/?size=100&id=11409&format=png&color=000000"
+      "subName": "Beauty & Personal Care",
+      "subIcon": "https://img.icons8.com/?size=100&id=24556&format=png&color=000000"
     },
     {
-      "subName": "Laptops",
-      "subIcon": "https://img.icons8.com/?size=100&id=2884&format=png&color=000000"
+      "subName": "Fashion & Clothing",
+      "subIcon": "https://img.icons8.com/?size=100&id=2989&format=png&color=000000"
     },
     {
-      "subName": "PC",
-      "subIcon": "https://img.icons8.com/?size=100&id=1345&format=png&color=000000"
+      "subName": "Accessories",
+      "subIcon": "https://img.icons8.com/?size=100&id=69628&format=png&color=000000"
     },
     {
-      "subName": "Cameras",
-      "subIcon": "https://img.icons8.com/?size=100&id=11741&format=png&color=000000"
+      "subName": "Electronics & Gadgets",
+      "subIcon": "https://img.icons8.com/?size=100&id=2169&format=png&color=000000"
     },
     {
-      "subName": "Headphones",
-      "subIcon": "https://img.icons8.com/?size=100&id=16E6Q5Vjlb6D&format=png&color=000000"
+      "subName": "Home & Furniture",
+      "subIcon": "https://img.icons8.com/?size=100&id=y2GWL3nrlTBH&format=png&color=000000"
     },
     {
-      "subName": "Speakers",
-      "subIcon": "https://img.icons8.com/?size=100&id=85682&format=png&color=000000"
+      "subName": "Groceries & Food",
+      "subIcon": "https://img.icons8.com/?size=100&id=114632&format=png&color=000000"
     },
     {
-      "subName": "Monitors",
-      "subIcon": "https://img.icons8.com/?size=100&id=39210&format=png&color=000000"
+      "subName": "Sports & Outdoors",
+      "subIcon": "https://img.icons8.com/?size=100&id=9820&format=png&color=000000"
     },
     {
-      "subName": "Gaming",
-      "subIcon": "https://img.icons8.com/?size=100&id=Ntb0hjLjjBxW&format=png&color=000000"
+      "subName": "Watches & Jewellery",
+      "subIcon": "https://img.icons8.com/?size=100&id=22180&format=png&color=000000"
     }
   ],
   "stats": [

@@ -27,14 +27,14 @@ function Homepage() {
       <main className="mx-auto py-10 md:w-[90%] xl:w-[85%]">
         <Suspense
           fallback={
-            <div className="hidden md:flex md:h-90 gap-10 xl:gap-10">
-              <Skeleton width="20%" height="288px" />
+            <div className="hidden md:flex md:h-100 gap-10 xl:gap-10">
+              <Skeleton width="20%" height="300px" />
               <Break horizontal={false} gap={0} percentage={90} />
               <Skeleton width="80%" height="280px" />
             </div>
           }
         >
-          <div className="hidden md:flex md:h-90 gap-10 xl:gap-10">
+          <div className="hidden md:flex md:h-100 gap-10 xl:gap-10">
             <AccordionComp />
             <Break horizontal={false} gap={0} percentage={90} />
             <CarouselComp width="w-[80%]" md="" lg="" />
@@ -50,11 +50,15 @@ function Homepage() {
         <Break />
 
         <Section
-          title="Sub Categories"
-          text="Browse By Sub Category"
+          title="Categories"
+          text="Browse By Category"
           productSection={false}
         />
-        <IconList option="subcategories" classes="xl:hover:scale-101" />
+        <IconList
+          option="categories"
+          classes="xl:hover:scale-101 text-sm"
+          linkify
+        />
         <Break />
 
         <Section
