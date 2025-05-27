@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
+import { toast } from "react-hot-toast";
 
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
@@ -160,17 +160,8 @@ function Cart() {
           aria-label="Clear cart"
           className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-70 md:w-50 h-10 order-1 md:order-0"
           onClick={() => {
-            Swal.fire({
-              title: "Are you sure?",
-              text: "This will remove all items from your cart.",
-              icon: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#ef4444",
-              cancelButtonColor: "#6b7280",
-              confirmButtonText: "Yes, clear it!",
-            }).then((result) => {
-              if (result.isConfirmed) clearCart();
-            });
+            clearCart();
+            toast.success("Cart cleared");
           }}
         >
           Clear Cart

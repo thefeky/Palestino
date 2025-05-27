@@ -1,4 +1,5 @@
-import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+
 import { useCart } from "@/context/CartContext";
 import { useProductModal } from "@/context/ProductModalContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -75,24 +76,12 @@ function Card({
     });
 
     if (!success) {
-      return Swal.fire({
-        toast: true,
-        icon: "warning",
-        title: "Please sign in to add to cart!",
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 1200,
+      return toast.error("Please sign in to add to cart!", {
+        icon: "⚠️",
       });
     }
 
-    Swal.fire({
-      toast: true,
-      icon: "success",
-      title: "Added to cart",
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 1200,
-    });
+    toast.success("Added to cart");
   };
 
   const handleIncreaseQuantity = () => {
@@ -137,13 +126,8 @@ function Card({
 
           if (isSaved) {
             removeFromWishlist(productID);
-            Swal.fire({
-              toast: true,
-              icon: "info",
-              title: "Removed from wishlist",
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 1200,
+            toast("Removed from wishlist", {
+              icon: "ℹ️",
             });
           } else {
             addToWishlist({
@@ -159,14 +143,7 @@ function Card({
               category,
               seller,
             });
-            Swal.fire({
-              toast: true,
-              icon: "success",
-              title: "Added to wishlist",
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 1200,
-            });
+            toast.success("Added to wishlist");
           }
         }}
         className="absolute right-3 top-3 z-10 text-red-500 transition"
@@ -252,14 +229,7 @@ function Card({
                 aria-label="Remove item from cart"
                 onClick={() => {
                   removeFromCart(productID);
-                  Swal.fire({
-                    toast: true,
-                    icon: "success",
-                    title: "Item removed",
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 1200,
-                  });
+                  toast.success("Item removed");
                 }}
                 className="flex-center h-8 w-8 rounded bg-gray-300 hover:bg-red-500 group"
               >

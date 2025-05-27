@@ -1,12 +1,12 @@
 import { Dialog } from "@headlessui/react";
 import { Fragment } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Swal from "sweetalert2";
 
 import type { ProductDetails } from "@/context/ProductModalContext";
 import { useCart } from "@/context/CartContext";
 
 import { Button } from "../ui/button";
+import toast from "react-hot-toast";
 
 interface ProductModalProps {
   product: ProductDetails | null;
@@ -47,26 +47,10 @@ function ProductModal({ product, onClose }: ProductModalProps) {
 
     if (!success) {
       return (
-        onClose(),
-        Swal.fire({
-          toast: true,
-          icon: "warning",
-          title: "Please sign in to add to cart!",
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 1200,
-        })
+        onClose(), toast.error("Please sign in to add to cart!", { icon: "⚠️" })
       );
     }
-
-    Swal.fire({
-      toast: true,
-      icon: "success",
-      title: "Added to cart",
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 1200,
-    });
+    toast.success("Added to cart");
   };
 
   const handleIncreaseQuantity = () => {
@@ -170,14 +154,7 @@ function ProductModal({ product, onClose }: ProductModalProps) {
                           aria-label="Remove item from cart"
                           onClick={() => {
                             removeFromCart(id);
-                            Swal.fire({
-                              toast: true,
-                              icon: "success",
-                              title: "Item removed",
-                              position: "top-end",
-                              showConfirmButton: false,
-                              timer: 1200,
-                            });
+                            toast.success("Item removed");
                           }}
                           className="w-8 h-8 bg-gray-300 rounded flex-center hover:bg-red-500 group"
                         >

@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import { useUser } from "@clerk/clerk-react";
+import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
@@ -266,17 +266,8 @@ function Checkout() {
                 aria-label="Cancel checkout"
                 className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-55 md:w-30 xl:w-50 h-10 order-1 md:order-0"
                 onClick={() => {
-                  Swal.fire({
-                    title: "Cancel checkout?",
-                    text: "You’ll be returned to your cart without placing an order.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#ef4444",
-                    cancelButtonColor: "#6b7280",
-                    confirmButtonText: "Back to Cart",
-                  }).then((res) => {
-                    if (res.isConfirmed) navigate("/cart");
-                  });
+                  navigate("/cart");
+                  toast("Returned to cart", { icon: "🛒" });
                 }}
               >
                 Cancel Order
@@ -307,11 +298,8 @@ function Checkout() {
 
                   clearCart();
 
-                  Swal.fire({
-                    icon: "success",
-                    title: "Order received!",
-                    text: "Thank you for your purchase.",
-                  }).then(() => navigate("/orders"));
+                  toast.success("Order received! Thank you for your purchase.");
+                  navigate("/orders");
                 })}
                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-55 md:w-30 xl:w-50 h-10"
               >

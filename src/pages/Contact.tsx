@@ -4,10 +4,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useUser } from "@clerk/clerk-react";
-import Swal from "sweetalert2";
 
 import Break from "@/components/shared/Break";
 import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -52,14 +52,7 @@ function Contact() {
     const updated = [...stored, { ...data, date: new Date().toISOString() }];
     localStorage.setItem(key, JSON.stringify(updated));
 
-    Swal.fire({
-      icon: "success",
-      title: "Message sent!",
-      toast: true,
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    toast.success("Message sent!");
 
     reset({ email: data.email });
   };
