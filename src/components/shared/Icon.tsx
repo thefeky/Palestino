@@ -58,6 +58,7 @@ function Icon({
             src={subIcon}
             style={{ width: `${iconSize}px`, height: `${iconSize}px` }}
             alt={subName}
+            loading="lazy"
           />
           {includeNames && (
             <span className={`font-semibold ${textColor}`}>{subName}</span>

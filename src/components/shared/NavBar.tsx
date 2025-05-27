@@ -11,7 +11,6 @@ import {
 import logo from "/assets/shared/icon.svg";
 import logo2 from "/assets/shared/logo2.png";
 import triangle from "/assets/shared/Red_Triangle.svg";
-import Banner from "./Banner";
 import CartIcon from "@/components/shared/CartIcon";
 
 function NavBar() {
@@ -33,22 +32,21 @@ function NavBar() {
   return (
     <>
       <header>
-        <Banner />
         <div
-          className={`flex items-center text-black py-3 px-6 md:px-12 bg-white ${
+          className={`z-50 flex items-center justify-between bg-white px-6 py-3 md:px-12 text-black ${
             isMenuOpen ? "shadow-none" : "shadow-md"
-          } z-50 justify-between`}
+          }`}
         >
           <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
             <img
-              src={`${isMd ? logo2 : logo}`}
+              loading="lazy"
+              src={isMd ? logo2 : logo}
               alt="logo"
-              className="w-10 md:w-50 min-w-10 justify-self-start"
+              className="min-w-10 w-10 md:w-50 justify-self-start"
             />
           </NavLink>
-          <ul
-            className={`flex flex-row items-center justify-center font-semibold xl:text-lg z-50 xl:order-1 gap-6`}
-          >
+
+          <ul className="z-50 flex flex-row items-center justify-center gap-2 font-semibold xl:order-1 xl:text-lg">
             <SignedOut>
               <li>
                 <NavLink
@@ -69,7 +67,22 @@ function NavBar() {
                 </NavLink>
               </li>
             </SignedOut>
+
             <SignedIn>
+              <NavLink
+                className="nav-link hidden xl:block"
+                to="/orders"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Orders
+              </NavLink>
+              <NavLink
+                className="nav-link hidden xl:block"
+                to="/wishlist"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Wishlist
+              </NavLink>
               <UserButton
                 showName
                 appearance={{
@@ -90,20 +103,14 @@ function NavBar() {
               >
                 <CartIcon />
               </NavLink>
-              <NavLink
-                className="hidden md:block nav-link"
-                to="/orders"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Orders
-              </NavLink>
             </SignedIn>
           </ul>
+
           <ul
-            className={`xl:flex xl:flex-row items-center justify-center font-semibold xl:text-lg z-50 ${
+            className={`z-50 items-center justify-center font-semibold xl:text-lg ${
               isMenuOpen
-                ? `absolute top-24 left-0 w-full bg-white flex flex-col items-center gap-6 text-lg pb-6 shadow-md`
-                : "hidden gap-12"
+                ? `absolute top-24 left-0 flex w-full flex-col gap-6 bg-white pb-6 text-lg shadow-md`
+                : "hidden xl:flex xl:flex-row xl:gap-8"
             }`}
           >
             <li>
@@ -126,6 +133,7 @@ function NavBar() {
                 About
               </NavLink>
             </li>
+
             {!isXl && (
               <SignedIn>
                 <li>
@@ -135,6 +143,15 @@ function NavBar() {
                     onClick={toggleMenu}
                   >
                     Orders
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    to="/wishlist"
+                    onClick={toggleMenu}
+                  >
+                    Wishlist
                   </NavLink>
                 </li>
                 <li>
@@ -156,11 +173,12 @@ function NavBar() {
               </SignedIn>
             )}
           </ul>
+
           <i
-            className="xl:hidden block w-10 md:w-16 xl:w-18 cursor-pointer min-w-10"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="block min-w-10 w-10 cursor-pointer md:w-16 xl:w-18 xl:hidden"
+            onClick={toggleMenu}
           >
-            <img src={triangle} alt="triangle" />
+            <img loading="lazy" src={triangle} alt="triangle" />
           </i>
         </div>
       </header>

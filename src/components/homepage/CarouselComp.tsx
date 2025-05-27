@@ -28,19 +28,19 @@ function CarouselComp({
       <Carousel plugins={plugins} className={width}>
         <CarouselContent className="h-70">
           <CarouselItem className={`${md} ${lg}`}>
-            <img src={img1} />
+            <img loading="lazy" src={img1} alt="img1" />
           </CarouselItem>
           <CarouselItem className={`${md} ${lg}`}>
-            <img src={img2} />
+            <img loading="lazy" src={img2} alt="img1" />
           </CarouselItem>
           <CarouselItem className={`${md} ${lg}`}>
-            <img src={img3} />
+            <img loading="lazy" src={img3} alt="img1" />
           </CarouselItem>
           <CarouselItem className={`${md} ${lg}`}>
-            <img src={img4} />
+            <img loading="lazy" src={img4} alt="img1" />
           </CarouselItem>
           <CarouselItem className={`${md} ${lg}`}>
-            <img src={img5} />
+            <img loading="lazy" src={img5} alt="img1" />
           </CarouselItem>
         </CarouselContent>
       </Carousel>

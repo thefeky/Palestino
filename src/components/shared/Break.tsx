@@ -3,16 +3,21 @@ interface BreakProps {
   percentage?: number;
   gap?: number;
 }
+
 function Break({ horizontal = true, percentage = 100, gap = 32 }: BreakProps) {
+  const dimensionStyle = horizontal
+    ? { width: `${percentage}%`, height: "2px" }
+    : { height: `${percentage}%`, width: "2px" };
+
   return (
     <div
-      className={`${horizontal ? "h-0.5" : "w-0.5"} bg-gray-300 flex mx-auto`}
+      className="bg-gray-300 mx-auto"
       style={{
-        [horizontal ? "width" : "height"]: `${percentage}%`,
+        ...dimensionStyle,
         marginTop: `${gap}px`,
         marginBottom: `${gap}px`,
       }}
-    ></div>
+    />
   );
 }
 

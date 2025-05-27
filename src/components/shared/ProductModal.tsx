@@ -101,6 +101,7 @@ function ProductModal({ product, onClose }: ProductModalProps) {
               </div>
               <div className="flex flex-col md:flex-row p-4 gap-6">
                 <img
+                  loading="lazy"
                   src={image}
                   alt={name}
                   className="hidden md:block w-auto md:h-70 xl:h-90 object-cover rounded"

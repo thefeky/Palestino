@@ -1,9 +1,13 @@
 import Swal from "sweetalert2";
-
 import { useCart } from "@/contexts/CartContext";
 import { useProductModal } from "@/contexts/ProductModalContext";
+import { useWishlist } from "@/contexts/WishlistContext";
 
 import { Button } from "../ui/button";
+import { Heart } from "lucide-react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
 import { useMediaQuery } from "react-responsive";
 
 interface CardProps {
@@ -35,6 +39,9 @@ function Card({
 }: CardProps) {
   const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
   const { openModal } = useProductModal();
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
+  const { user } = useUser();
+  const navigate = useNavigate();
 
   const priceAfterPromotion = +(
     productPrice -
@@ -94,23 +101,94 @@ function Card({
   };
 
   const resFix = useMediaQuery({
-    minWidth: 1577,
-    maxWidth: 1765,
+    minWidth: 431,
+    maxWidth: 767,
+  });
+
+  const mdResFix = useMediaQuery({
+    minWidth: 768,
+    maxWidth: 1004,
+  });
+
+  const xlResFix = useMediaQuery({
+    minWidth: 1280,
+    maxWidth: 1430,
   });
 
   return (
     <div
-      className={`relative mx-auto xl:mx-5  h-100 w-[90%] ${
-        resFix ? "md:max-w-70" : "md:max-w-80"
-      } max-w-xs overflow-hidden rounded-lg border border-red-500 bg-white duration-500 ease-in-out xl:hover:scale-105 hover:shadow-md hover:shadow-gray-500`}
+      className={`relative h-100 ${resFix ? "w-[40%] min-w-70" : "w-[90%]"} ${
+        mdResFix ? "md:w-80" : "md:w-[30%] md:min-w-70 md:max-w-80"
+      } ${
+        xlResFix ? "xl:w-80" : "xl:w-[20%] xl:min-w-70 xl:max-w-80"
+      } overflow-hidden rounded-lg border border-red-500 bg-white duration-500 ease-in-out hover:shadow-md hover:shadow-gray-500 xl:hover:scale-105`}
     >
+      <motion.button
+        whileTap={{ scale: 0.8, rotate: 15 }}
+        whileHover={{ scale: 1.2 }}
+        onClick={() => {
+          if (!user) {
+            navigate("/sign-in");
+            return;
+          }
+
+          const isSaved = isInWishlist(productID);
+
+          if (isSaved) {
+            removeFromWishlist(productID);
+            Swal.fire({
+              toast: true,
+              icon: "info",
+              title: "Removed from wishlist",
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 1200,
+            });
+          } else {
+            addToWishlist({
+              productID,
+              productName,
+              productImage,
+              description,
+              promotion,
+              featured,
+              productPrice,
+              rating,
+              stock,
+              category,
+              seller,
+            });
+            Swal.fire({
+              toast: true,
+              icon: "success",
+              title: "Added to wishlist",
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 1200,
+            });
+          }
+        }}
+        className="absolute right-3 top-3 z-10 text-red-500 transition"
+      >
+        {isInWishlist(productID) ? (
+          <Heart size={20} fill="#ef4444" />
+        ) : (
+          <Heart size={20} />
+        )}
+      </motion.button>
+
       <div
-        className="relative mx-3 mt-3 flex-center h-50 w-auto overflow-hidden rounded-xl cursor-pointer"
+        className="relative mx-3 mt-3 flex-center h-50 w-auto cursor-pointer overflow-hidden rounded-xl"
         onClick={handleOpen}
       >
-        <img className="h-40" src={productImage} alt={productName} />
+        <img
+          loading="lazy"
+          className="h-40"
+          src={productImage}
+          alt={productName}
+        />
         {featured && (
-          <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
+          <span className="absolute left-0 top-0 m-2 rounded-full bg-black px-2 text-sm font-medium text-white">
             {promotion}% OFF
           </span>
         )}
@@ -119,9 +197,9 @@ function Card({
       <div className="mt-4 px-5 pb-5">
         <h5 className="text-xl tracking-tight text-slate-900">{productName}</h5>
 
-        <div className="mt-2 mb-5 flex items-center justify-between">
+        <div className="mb-5 mt-2 flex items-center justify-between">
           <p>
-            <span className="text-3xl font-bold text-slate-900 mr-1 xl:mr-3">
+            <span className="mr-1 text-2xl font-bold text-slate-900">
               ${priceAfterPromotion}
             </span>
             {featured && (
@@ -167,7 +245,7 @@ function Card({
         </div>
 
         {cartItem ? (
-          <div className="flex-center gap-6 outline-1 rounded-full outline-red-500 p-1 mx-auto">
+          <div className="mx-auto flex-center gap-6 rounded-full p-1 outline-1 outline-red-500">
             {cartItem.quantity <= 1 ? (
               <button
                 onClick={() => {
@@ -181,11 +259,11 @@ function Card({
                     timer: 1200,
                   });
                 }}
-                className="w-8 h-8 bg-gray-200 rounded flex-center hover:bg-red-500 group"
+                className="flex-center h-8 w-8 rounded bg-gray-200 hover:bg-red-500 group"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 text-red-500 group-hover:text-white"
+                  className="h-5 w-5 text-red-500 group-hover:text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -201,22 +279,22 @@ function Card({
             ) : (
               <button
                 onClick={() => updateQuantity(productID, cartItem.quantity - 1)}
-                className="w-8 h-8 bg-gray-200 rounded flex-center hover:bg-red-500 hover:text-white"
+                className="flex-center h-8 w-8 rounded bg-gray-200 hover:bg-red-500 hover:text-white"
               >
                 −
               </button>
             )}
-            <span className="font-semibold text-lg w-4 text-center">
+            <span className="w-4 text-center text-lg font-semibold">
               {cartItem.quantity}
             </span>
             <button
               onClick={handleIncreaseQuantity}
               disabled={cartItem.quantity >= stock}
-              className="w-8 h-8 bg-gray-200 rounded flex-center hover:bg-red-500 hover:text-white disabled:hover:bg-gray-200 disabled:hover:text-inherit"
+              className="flex-center h-8 w-8 rounded bg-gray-200 hover:bg-red-500 hover:text-white disabled:hover:bg-gray-200 disabled:hover:text-inherit"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4"
+                className="h-4 w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -233,7 +311,7 @@ function Card({
         ) : (
           <Button
             onClick={handleAddToCart}
-            className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 w-full"
+            className="w-full rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

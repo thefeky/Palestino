@@ -1,9 +1,9 @@
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Link } from "react-router";
-
-import { Button } from "@/components/ui/button";
 
 import { useCart } from "@/contexts/CartContext";
+import { Button } from "@/components/ui/button";
 
 function Cart() {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
@@ -15,18 +15,39 @@ function Cart() {
 
   if (cart.length === 0) {
     return (
-      <div className="text-center mt-10 text-lg font-semibold">
-        Your cart is empty.{" "}
-        <Link to="/shop" className="text-red-500 underline">
-          Shop now!
-        </Link>
-      </div>
+      <main className="w-[90%] xl:w-[80%] mx-auto py-10">
+        <Helmet>
+          <title>Cart | Palestino</title>
+          <meta
+            name="description"
+            content="Your shopping cart is currently empty. Browse our products and add items to your cart."
+          />
+          <link rel="canonical" href="https://palestino.com/cart" />
+        </Helmet>
+
+        <div className="text-center mt-10 text-lg font-semibold">
+          Your cart is empty.{" "}
+          <Link to="/shop" className="text-red-500 underline">
+            Shop now!
+          </Link>
+        </div>
+      </main>
     );
   }
 
   return (
     <main className="w-[90%] max-w-6xl mx-auto py-10">
+      <Helmet>
+        <title>Cart | Palestino</title>
+        <meta
+          name="description"
+          content="Review your selected items and proceed to checkout on Palestino."
+        />
+        <link rel="canonical" href="https://palestino.com/cart" />
+      </Helmet>
+
       <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
+
       <ul className="space-y-4">
         {cart.map((item) => (
           <li
@@ -35,6 +56,7 @@ function Cart() {
           >
             <div className="flex items-center flex-col md:flex-row">
               <img
+                loading="lazy"
                 src={item.productImage}
                 alt={item.productName}
                 className="w-20 h-20 object-cover mr-4 rounded"
@@ -46,6 +68,7 @@ function Cart() {
                 </p>
               </div>
             </div>
+
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <button
@@ -70,9 +93,11 @@ function Cart() {
                     />
                   </svg>
                 </button>
+
                 <span className="font-semibold text-lg w-4 text-center">
                   {item.quantity}
                 </span>
+
                 <button
                   onClick={() =>
                     updateQuantity(item.productID, item.quantity + 1)
@@ -99,6 +124,7 @@ function Cart() {
                   </svg>
                 </button>
               </div>
+
               <Button
                 onClick={() => removeFromCart(item.productID)}
                 className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-red-500 group"
@@ -122,6 +148,7 @@ function Cart() {
           </li>
         ))}
       </ul>
+
       <p className="text-xl font-semibold text-center mt-4">
         Total: ${total.toFixed(2)}
       </p>
@@ -145,6 +172,7 @@ function Cart() {
         >
           Clear Cart
         </Button>
+
         <Link to="/checkout">
           <Button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer w-70 md:w-50 h-10">
             Proceed to Checkout

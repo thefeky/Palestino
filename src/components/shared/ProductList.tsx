@@ -22,69 +22,86 @@ interface Product {
 interface ProductListProps {
   onSale?: boolean;
   num?: number;
+  searchQuery?: string;
+  disableResponsiveLimit?: boolean;
 }
 
-function ProductList({ onSale, num }: ProductListProps) {
+function ProductList({
+  onSale,
+  num = 8,
+  searchQuery,
+  disableResponsiveLimit = false,
+}: ProductListProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [showMore, setShowMore] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    function fetchProducts() {
-      axios
-        .get("/assets/products.json")
-        .then((res) => {
-          const products = res.data.products;
-          if (onSale !== undefined) {
-            const filteredProducts = products.filter(
-              (product: Product) => product.featured === onSale
-            );
-            setProducts(filteredProducts);
-          } else {
-            setProducts(products);
-          }
-        })
-        .catch((err) => console.error("Error fetching products:", err));
-    }
-    fetchProducts();
-  }, [onSale]);
+    setIsLoading(true);
+    axios
+      .get("/assets/products.json")
+      .then((res) => {
+        const rawProducts: Product[] = res.data.products;
+        const filteredBySale =
+          onSale !== undefined
+            ? rawProducts.filter((product) => product.featured === onSale)
+            : rawProducts;
 
-  const resFix = useMediaQuery({
-    minWidth: 1100,
-    maxWidth: 1576,
-  });
+        const filteredBySearch = searchQuery
+          ? filteredBySale.filter((product) => {
+              const q = searchQuery.toLowerCase();
+              return (
+                product.productName.toLowerCase().includes(q) ||
+                product.category.toLowerCase().includes(q)
+              );
+            })
+          : filteredBySale;
+
+        setProducts(filteredBySearch);
+      })
+      .catch((err) => console.error("Error fetching products:", err))
+      .finally(() => setIsLoading(false));
+  }, [onSale, searchQuery]);
+
+  const resFix = useMediaQuery({ minWidth: 1005, maxWidth: 1430 });
 
   const visibleProducts = showMore
     ? products
-    : products.slice(0, resFix ? 3 : num);
+    : products.slice(0, disableResponsiveLimit ? num : resFix ? 3 : num);
 
   return (
     <>
-      <div className="flex-center flex-wrap gap-5">
-        {visibleProducts.map((product) => (
-          <Card
-            key={product.productID}
-            productID={product.productID}
-            productImage={product.productImage}
-            productName={product.productName}
-            productPrice={product.productPrice}
-            description={product.description}
-            category={product.category}
-            stock={product.stock}
-            rating={product.rating}
-            seller={product.seller}
-            promotion={product.promotion}
-            featured={product.featured}
-          />
-        ))}
-      </div>
-      <div className="flex justify-center">
-        <Button
-          className="bg-red-500 text-white hover:bg-red-600 mx-auto mt-8 cursor-pointer"
-          onClick={() => setShowMore(!showMore)}
-        >
-          {showMore ? "Show less" : "Show more"}
-        </Button>
-      </div>
+      {!isLoading && products.length === 0 ? (
+        <div className="mt-8 text-center text-gray-500">
+          No matching products found.
+        </div>
+      ) : (
+        <>
+          <div className="flex-center flex-wrap gap-8">
+            {isLoading
+              ? Array.from({ length: num }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-[90%] md:max-w-80 h-100 bg-gray-200 animate-pulse rounded-lg"
+                  />
+                ))
+              : visibleProducts.map((product) => (
+                  <Card key={product.productID} {...product} />
+                ))}
+          </div>
+
+          {!isLoading && products.length >= 8 && (
+            <div className="flex justify-center">
+              <Button
+                className="mx-auto mt-8 cursor-pointer bg-red-500 text-white hover:bg-red-600"
+                onClick={() => setShowMore(!showMore)}
+              >
+                {showMore ? "Show less" : "Show more"}
+              </Button>
+            </div>
+          )}
+        </>
+      )}
     </>
   );
 }

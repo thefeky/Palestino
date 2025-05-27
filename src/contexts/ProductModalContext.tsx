@@ -25,15 +25,6 @@ const ProductModalContext = createContext<ProductModalContextType | undefined>(
   undefined
 );
 
-function useProductModal() {
-  const context = useContext(ProductModalContext);
-  if (!context)
-    throw new Error(
-      "useProductModal must be used within a ProductModalProvider"
-    );
-  return context;
-}
-
 function ProductModalProvider({ children }: { children: ReactNode }) {
   const [product, setProduct] = useState<ProductDetails | null>(null);
   const isOpen = !!product;
@@ -53,6 +44,15 @@ function ProductModalProvider({ children }: { children: ReactNode }) {
       {children}
     </ProductModalContext.Provider>
   );
+}
+
+function useProductModal() {
+  const context = useContext(ProductModalContext);
+  if (!context)
+    throw new Error(
+      "useProductModal must be used within a ProductModalProvider"
+    );
+  return context;
 }
 
 export { ProductModalProvider, useProductModal };
