@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { useForm } from "react-hook-form";
@@ -67,14 +66,12 @@ function Contact() {
 
   return (
     <>
-      <Helmet>
-        <title>Contact | Palestino</title>
-        <meta
-          name="description"
-          content="Get in touch with Palestino for support, inquiries, or feedback. We're here to help 24/7."
-        />
-        <link rel="canonical" href="https://palestino.com/contact" />
-      </Helmet>
+      <title>Contact | Palestino</title>
+      <meta
+        name="description"
+        content="Get in touch with Palestino for support, inquiries, or feedback. We're here to help 24/7."
+      />
+      <link rel="canonical" href="https://palestino.com/contact" />
 
       <main className="mx-auto w-[90%] xl:w-[80%] py-8 xl:py-10">
         <p className="text-black">

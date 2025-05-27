@@ -1,17 +1,14 @@
-import { Helmet } from "react-helmet-async";
 import { SignIn } from "@clerk/react-router";
 
 function Login() {
   return (
     <>
-      <Helmet>
-        <title>Login | Palestino</title>
-        <meta
-          name="description"
-          content="Sign in to your Palestino account to view orders, wishlist, and more."
-        />
-        <link rel="canonical" href="https://palestino.com/sign-in" />
-      </Helmet>
+      <title>Login | Palestino</title>
+      <meta
+        name="description"
+        content="Sign in to your Palestino account to view orders, wishlist, and more."
+      />
+      <link rel="canonical" href="https://palestino.com/sign-in" />
 
       <main className="mx-auto w-[90%] xl:w-[80%] py-8 xl:py-10">
         <div className="w-full flex-center flex-col xl:flex-row gap-2 md:gap-20 md:my-10">

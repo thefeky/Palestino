@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { lazy, Suspense, useMemo } from "react";
 import Skeleton from "react-skeleton-loaders";
 
@@ -18,14 +17,12 @@ function Homepage() {
 
   return (
     <>
-      <Helmet>
-        <title>Homepage | Palestino</title>
-        <meta
-          name="description"
-          content="Browse flash sales, categories, and top-selling products on Palestino."
-        />
-        <link rel="canonical" href={canonicalUrl} />
-      </Helmet>
+      <title>Homepage | Palestino</title>
+      <meta
+        name="description"
+        content="Browse flash sales, categories, and top-selling products on Palestino."
+      />
+      <link rel="canonical" href={canonicalUrl} />
 
       <main className="mx-auto py-10 md:w-[90%] xl:w-[85%]">
         <Suspense

@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useWishlist } from "@/contexts/WishlistContext";
 import Card from "@/components/shared/Card";
@@ -15,11 +14,9 @@ function Wishlist() {
 
   return (
     <>
-      <Helmet>
-        <title>Wishlist | Palestino</title>
-        <meta name="description" content="Your saved products on Palestino." />
-        <link rel="canonical" href="https://palestino.com/wishlist" />
-      </Helmet>
+      <title>Wishlist | Palestino</title>
+      <meta name="description" content="Your saved products on Palestino." />
+      <link rel="canonical" href="https://palestino.com/wishlist" />
 
       <main className="mx-auto py-10 md:w-[90%] xl:w-[85%]">
         <h1 className="mb-6 text-center text-3xl font-bold">Your Wishlist</h1>

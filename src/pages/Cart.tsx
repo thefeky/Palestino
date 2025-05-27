@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -16,14 +15,12 @@ function Cart() {
   if (cart.length === 0) {
     return (
       <main className="w-[90%] xl:w-[80%] mx-auto py-10">
-        <Helmet>
-          <title>Cart | Palestino</title>
-          <meta
-            name="description"
-            content="Your shopping cart is currently empty. Browse our products and add items to your cart."
-          />
-          <link rel="canonical" href="https://palestino.com/cart" />
-        </Helmet>
+        <title>Cart | Palestino</title>
+        <meta
+          name="description"
+          content="Your shopping cart is currently empty. Browse our products and add items to your cart."
+        />
+        <link rel="canonical" href="https://palestino.com/cart" />
 
         <div className="text-center mt-10 text-lg font-semibold">
           Your cart is empty.{" "}
@@ -37,14 +34,12 @@ function Cart() {
 
   return (
     <main className="w-[90%] max-w-6xl mx-auto py-10">
-      <Helmet>
-        <title>Cart | Palestino</title>
-        <meta
-          name="description"
-          content="Review your selected items and proceed to checkout on Palestino."
-        />
-        <link rel="canonical" href="https://palestino.com/cart" />
-      </Helmet>
+      <title>Cart | Palestino</title>
+      <meta
+        name="description"
+        content="Review your selected items and proceed to checkout on Palestino."
+      />
+      <link rel="canonical" href="https://palestino.com/cart" />
 
       <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
 

@@ -1,7 +1,6 @@
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { Helmet } from "react-helmet-async";
 
 interface OrderItem {
   productID: string;
@@ -38,13 +37,11 @@ function Orders() {
 
   return (
     <>
-      <Helmet>
-        <title>Orders | Palestino</title>
-        <meta
-          name="description"
-          content="View your order history on Palestino."
-        />
-      </Helmet>
+      <title>Orders | Palestino</title>
+      <meta
+        name="description"
+        content="View your order history on Palestino."
+      />
 
       <main className="w-[90%] max-w-6xl mx-auto py-10">
         <h1 className="text-2xl font-bold mb-6">My Orders</h1>

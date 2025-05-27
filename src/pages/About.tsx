@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 import IconList from "@/components/shared/IconList";
@@ -25,14 +24,12 @@ const founders = [
 function About() {
   return (
     <main className="w-[90%] xl:w-[80%] mx-auto py-8 xl:py-10">
-      <Helmet>
-        <title>About Us | Palestino</title>
-        <meta
-          name="description"
-          content="Learn about Palestino's story, mission, and leadership."
-        />
-        <link rel="canonical" href="https://palestino.com/about" />
-      </Helmet>
+      <title>About Us | Palestino</title>
+      <meta
+        name="description"
+        content="Learn about Palestino's story, mission, and leadership."
+      />
+      <link rel="canonical" href="https://palestino.com/about" />
 
       <p className="text-black mb-4">
         <Link to="/" className="text-black/50">

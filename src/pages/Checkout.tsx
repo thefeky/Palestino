@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -76,13 +75,11 @@ function Checkout() {
 
   return (
     <>
-      <Helmet>
-        <title>Checkout | Palestino</title>
-        <meta
-          name="description"
-          content="Secure checkout page for your Palestino orders."
-        />
-      </Helmet>
+      <title>Checkout | Palestino</title>
+      <meta
+        name="description"
+        content="Secure checkout page for your Palestino orders."
+      />
 
       <main className="w-[90%] max-w-6xl mx-auto py-10">
         <h1 className="text-2xl font-bold mb-6">Checkout</h1>

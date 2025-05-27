@@ -1,7 +1,6 @@
 import AppRoutes from "./routes/AppRoutes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ClerkProvider } from "@clerk/react-router";
-import { HelmetProvider } from "react-helmet-async";
 import "./App.css";
 
 import { CartProvider } from "./contexts/CartContext";
@@ -14,17 +13,15 @@ if (!PUBLISHABLE_KEY) throw new Error("Missing Clerk Publishable Key");
 function App() {
   return (
     <Router>
-      <HelmetProvider>
-        <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-          <WishlistProvider>
-            <CartProvider>
-              <ProductModalProvider>
-                <AppRoutes />
-              </ProductModalProvider>
-            </CartProvider>
-          </WishlistProvider>
-        </ClerkProvider>
-      </HelmetProvider>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+        <WishlistProvider>
+          <CartProvider>
+            <ProductModalProvider>
+              <AppRoutes />
+            </ProductModalProvider>
+          </CartProvider>
+        </WishlistProvider>
+      </ClerkProvider>
     </Router>
   );
 }

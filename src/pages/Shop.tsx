@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -19,14 +18,12 @@ function Shop() {
 
   return (
     <>
-      <Helmet>
-        <title>Shop | Palestino</title>
-        <meta
-          name="description"
-          content="Browse our curated selection of quality products on Palestino."
-        />
-        <link rel="canonical" href={canonicalUrl} />
-      </Helmet>
+      <title>Shop | Palestino</title>
+      <meta
+        name="description"
+        content="Browse our curated selection of quality products on Palestino."
+      />
+      <link rel="canonical" href={canonicalUrl} />
 
       <main className="mx-auto py-10 md:w-[90%] xl:w-[85%]">
         <div className="relative flex-center gap-3 pb-4">

@@ -1,17 +1,14 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 function NotFound() {
   return (
     <main className="w-[90%] xl:w-[80%] mx-auto py-20 text-center">
-      <Helmet>
-        <title>404 Not Found | Palestino</title>
-        <meta
-          name="description"
-          content="The page you’re looking for doesn’t exist."
-        />
-        <link rel="canonical" href="https://palestino.com/404" />
-      </Helmet>
+      <title>404 Not Found | Palestino</title>
+      <meta
+        name="description"
+        content="The page you’re looking for doesn’t exist."
+      />
+      <link rel="canonical" href="https://palestino.com/404" />
 
       <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
       <p className="text-gray-600 mb-6">
