@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-import logo from "/assets/shared/logo2.png";
-import qr from "/assets/shared/qr.png";
+import logo from "/assets/shared/logo2.webp";
+import qr from "/assets/shared/qr.webp";
 
 function Footer() {
   return (

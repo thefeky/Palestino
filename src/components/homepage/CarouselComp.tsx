@@ -4,11 +4,11 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import img1 from "/assets/carousel/1.jpg";
-import img2 from "/assets/carousel/2.jpg";
-import img3 from "/assets/carousel/3.jpg";
-import img4 from "/assets/carousel/4.jpg";
-import img5 from "/assets/carousel/5.jpg";
+import img1 from "/assets/carousel/1.webp";
+import img2 from "/assets/carousel/2.webp";
+import img3 from "/assets/carousel/3.webp";
+import img4 from "/assets/carousel/4.webp";
+import img5 from "/assets/carousel/5.webp";
 
 function CarouselComp({
   width,
@@ -26,7 +26,7 @@ function CarouselComp({
   return (
     <>
       <Carousel plugins={plugins} className={width}>
-        <CarouselContent className="h-70">
+        <CarouselContent className="h-100">
           <CarouselItem className={`${md} ${lg}`}>
             <img loading="eager" src={img1} alt="img1" />
           </CarouselItem>

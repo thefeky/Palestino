@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 
 import IconList from "@/components/shared/IconList";
-import pic from "/assets/aboutus/Shopping.jpg";
+import pic from "/assets/aboutus/Shopping.webp";
 
 const founders = [
   {
     name: "Ahmed Amer",
     role: "Founder & Chairman",
-    image: "assets/aboutus/Amer.jpg",
+    image: "assets/aboutus/Amer.webp",
   },
   {
     name: "Sherif Ali",
     role: "Managing Director",
-    image: "assets/aboutus/Sherif.jpg",
+    image: "assets/aboutus/Sherif.webp",
   },
   {
     name: "Hazem Elseddiq",
     role: "Product Designer",
-    image: "assets/aboutus/Hazem.jpeg",
+    image: "assets/aboutus/Hazem.webp",
   },
 ];
 

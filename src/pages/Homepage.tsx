@@ -28,9 +28,9 @@ function Homepage() {
         <Suspense
           fallback={
             <div className="hidden md:flex md:h-100 gap-10 xl:gap-10">
-              <Skeleton width="20%" height="300px" />
+              <Skeleton width="20%" height="400px" />
               <Break horizontal={false} gap={0} percentage={90} />
-              <Skeleton width="80%" height="280px" />
+              <Skeleton width="80%" height="400px" />
             </div>
           }
         >

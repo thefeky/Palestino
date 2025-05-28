@@ -9,7 +9,7 @@ import {
 } from "@clerk/clerk-react";
 
 import logo from "/assets/shared/icon.svg";
-import logo2 from "/assets/shared/logo2.png";
+import logo2 from "/assets/shared/logo2.webp";
 import triangle from "/assets/shared/Red_Triangle.svg";
 import CartIcon from "@/components/shared/CartIcon";
 

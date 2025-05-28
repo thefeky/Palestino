@@ -159,12 +159,7 @@ function Card({
         className="relative mx-3 mt-3 flex-center h-50 w-auto cursor-pointer overflow-hidden rounded-xl"
         onClick={handleOpen}
       >
-        <img
-          loading="lazy"
-          className="h-40"
-          src={productImage}
-          alt={productName}
-        />
+        <img className="h-40 w-auto" src={productImage} alt={productName} />
         {featured && (
           <span className="absolute left-0 top-0 m-2 rounded-full bg-black px-2 text-sm font-medium text-white">
             {promotion}% OFF

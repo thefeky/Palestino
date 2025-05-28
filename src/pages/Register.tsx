@@ -18,7 +18,7 @@ function Login() {
         <div className="w-full flex-center flex-col xl:flex-row gap-2 md:gap-20 md:my-10">
           <img
             className="hidden md:block w-[90%] xl:w-1/2 xl:max-h-120 mt-2 xl:mt-0 mb-4 xl:mb-0"
-            src="assets/login/pic.jpg"
+            src="assets/auth/pic.webp"
             alt="Register Visual"
             loading="lazy"
           />
