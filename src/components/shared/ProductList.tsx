@@ -21,19 +21,25 @@ interface Product {
 }
 
 interface ProductListProps {
+  num?: number;
   featuredFilter?: boolean;
   categoryFilter?: string;
-  num?: number;
   searchQuery?: string;
   disableResponsiveLimit?: boolean;
+  currentPage?: number;
+  disableShowMore?: boolean;
+  onTotalProductsCount?: (count: number) => void;
 }
 
 function ProductList({
+  num = 8,
   featuredFilter,
   categoryFilter,
-  num = 8,
   searchQuery,
   disableResponsiveLimit = false,
+  currentPage,
+  disableShowMore = false,
+  onTotalProductsCount,
 }: ProductListProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -75,10 +81,16 @@ function ProductList({
       .finally(() => setIsLoading(false));
   }, [featuredFilter, categoryFilter, searchQuery]);
 
-  const visibleProducts = products.slice(
-    0,
-    disableResponsiveLimit ? num : resFix ? 3 : num
-  );
+  useEffect(() => {
+    if (onTotalProductsCount) {
+      onTotalProductsCount(products.length);
+    }
+  }, [products.length, onTotalProductsCount]);
+
+  const visibleProducts =
+    currentPage !== undefined
+      ? products.slice((currentPage - 1) * num, currentPage * num)
+      : products.slice(0, disableResponsiveLimit ? num : resFix ? 3 : num);
 
   const handleShowMoreClick = () => {
     if (featuredFilter === true) {
@@ -86,7 +98,7 @@ function ProductList({
     } else {
       navigate("/shop");
     }
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -110,7 +122,7 @@ function ProductList({
                 ))}
           </div>
 
-          {!isLoading && products.length >= 8 && (
+          {!disableShowMore && !isLoading && products.length >= 8 && (
             <div className="flex justify-center">
               <Button
                 aria-label="Show more products"

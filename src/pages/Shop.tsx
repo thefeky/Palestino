@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Section from "@/components/shared/Section";
 import ProductList from "@/components/shared/ProductList";
+import PaginationArrows from "@/components/shared/PaginationArrows";
 
 const categories = [
   "Beauty & Personal Care",
@@ -20,42 +21,72 @@ function Shop() {
   const searchQuery = searchParams.get("search") || "";
   const categoryQuery = searchParams.get("category") || "";
   const featuredQuery = searchParams.get("featured") === "true";
+  const pageQuery = Number(searchParams.get("page")) || 1;
 
   const [inputValue, setInputValue] = useState(searchQuery);
+  const [debouncedInput, setDebouncedInput] = useState(inputValue);
   const [selectedCategory, setSelectedCategory] = useState(categoryQuery);
   const [featuredOnly, setFeaturedOnly] = useState(featuredQuery);
+  const [currentPage, setCurrentPage] = useState(pageQuery);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const num = 12;
+
+  const maxPage = Math.max(1, Math.ceil(totalProducts / num));
+
+  useEffect(() => {
+    const handler = setTimeout(() => setDebouncedInput(inputValue), 400);
+    return () => clearTimeout(handler);
+  }, [inputValue]);
+
+  useEffect(() => {
+    const params: Record<string, string> = {};
+    if (debouncedInput) params.search = debouncedInput;
+    if (selectedCategory) params.category = selectedCategory;
+    if (featuredOnly) params.featured = "true";
+    if (currentPage > 1) params.page = currentPage.toString();
+
+    setSearchParams(params);
+  }, [
+    debouncedInput,
+    selectedCategory,
+    featuredOnly,
+    currentPage,
+    setSearchParams,
+  ]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [debouncedInput, selectedCategory, featuredOnly]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
-    updateSearchParams(value, selectedCategory, featuredOnly);
+    setInputValue(e.target.value);
   };
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setSelectedCategory(value);
-    updateSearchParams(inputValue, value, featuredOnly);
+    setSelectedCategory(e.target.value);
   };
 
   const handleFeaturedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-    setFeaturedOnly(checked);
-    updateSearchParams(inputValue, selectedCategory, checked);
+    setFeaturedOnly(e.target.checked);
   };
 
-  function updateSearchParams(
-    search: string,
-    category: string,
-    featured: boolean
-  ) {
-    const params: Record<string, string> = {};
-    if (search) params.search = search;
-    if (category) params.category = category;
-    if (featured) params.featured = "true";
-    setSearchParams(params);
-  }
-
   const canonicalUrl = useMemo(() => "https://palestino.com/shop", []);
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < maxPage) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <>
@@ -73,7 +104,7 @@ function Shop() {
           productSection={false}
         />
 
-        <ul className="list-none flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4 pb-6 md:pb-8 w-full mx-auto md:w-[90%] xl:w-[85%]">
+        <ul className="list-none flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4 w-full mx-auto md:w-[90%] xl:w-[85%]">
           <li className="w-[80%] md:w-[70%] flex-grow">
             <input
               type="text"
@@ -91,7 +122,6 @@ function Shop() {
               value={selectedCategory}
               onChange={handleCategoryChange}
               className="appearance-none rounded-xl border border-red-500 py-2 px-3 text-sm md:text-base focus:outline-red-500
-                /* Firefox */
                 firefox:appearance-none
                 "
             >
@@ -134,12 +164,30 @@ function Shop() {
           </li>
         </ul>
 
-        <ProductList
-          num={12}
-          searchQuery={searchQuery}
-          disableResponsiveLimit={true}
-          categoryFilter={selectedCategory}
-          featuredFilter={featuredOnly}
+        <PaginationArrows
+          currentPage={currentPage}
+          maxPage={maxPage}
+          onPrev={handlePrevPage}
+          onNext={handleNextPage}
+        />
+        <div className="my-5">
+          <ProductList
+            num={num}
+            currentPage={currentPage}
+            searchQuery={debouncedInput}
+            disableResponsiveLimit={true}
+            categoryFilter={selectedCategory}
+            featuredFilter={featuredOnly}
+            disableShowMore={true}
+            onTotalProductsCount={setTotalProducts}
+          />
+        </div>
+
+        <PaginationArrows
+          currentPage={currentPage}
+          maxPage={maxPage}
+          onPrev={handlePrevPage}
+          onNext={handleNextPage}
         />
       </main>
     </>
