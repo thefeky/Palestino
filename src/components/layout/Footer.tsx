@@ -14,7 +14,8 @@ function Footer() {
                 src={logo}
                 alt="logo"
                 loading="lazy"
-                className="max-w-20 xl:max-w-40"
+                className="xl:w-40"
+                width={80}
               />
             </Link>
           </li>
@@ -51,7 +52,9 @@ function Footer() {
               loading="lazy"
               src={qr}
               alt="qr"
-              className="max-w-30 border-2 border-red-500"
+              className="border-2 border-red-500"
+              width={120}
+              height={120}
             />
             <ul className="flex flex-col gap-3">
               <li>
@@ -73,12 +76,12 @@ function Footer() {
 
       <div className="mx-auto flex gap-8 items-center justify-between md:hidden">
         <div>
-          <img loading="lazy" src={logo} alt="logo" className="max-w-30" />
+          <img loading="lazy" src={logo} alt="logo" width={120} />
           <Link to="/" aria-label="logo" className="font-semibold">
             Download App!
           </Link>
         </div>
-        <img loading="lazy" src={qr} alt="qr" className="max-w-20" />
+        <img loading="lazy" src={qr} alt="qr" width={100} />
       </div>
     </footer>
   );

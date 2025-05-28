@@ -43,10 +43,10 @@ function NavBar() {
             onClick={() => setIsMenuOpen(false)}
           >
             <img
-              loading="lazy"
               src={isMd ? logo2 : logo}
               alt="logo"
-              className="min-w-10 w-10 md:w-50 justify-self-start"
+              className="md:w-50 justify-self-start"
+              width={40}
             />
           </NavLink>
 
@@ -211,11 +211,8 @@ function NavBar() {
             )}
           </ul>
 
-          <i
-            className="block min-w-10 w-10 cursor-pointer md:w-16 xl:w-18 xl:hidden"
-            onClick={toggleMenu}
-          >
-            <img loading="lazy" src={triangle} alt="triangle" />
+          <i className="block cursor-pointer xl:hidden" onClick={toggleMenu}>
+            <img src={triangle} alt="triangle" width={40} className="md:w-16" />
           </i>
         </div>
       </header>
